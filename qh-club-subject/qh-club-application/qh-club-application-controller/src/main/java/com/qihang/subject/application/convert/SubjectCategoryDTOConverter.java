@@ -16,11 +16,12 @@ import java.util.List;
 @Mapper
 public interface SubjectCategoryDTOConverter {
 
+    //单例实例,通过这种方式，可以直接调用接口中的方法，而无需手动实例化实现类。
     SubjectCategoryDTOConverter INSTANCE = Mappers.getMapper(SubjectCategoryDTOConverter.class);
-
+    //将一个 SubjectCategoryBO 对象列表转换为一个 SubjectCategoryDTO 对象列表
     List<SubjectCategoryDTO> convertBoToCategoryDTOList(List<SubjectCategoryBO> subjectCategoryDTO);
-
-    SubjectCategoryBO convertDtoToCategoryBO(SubjectCategoryDTO subjectCategoryDTO);
+    //将一个 SubjectCategoryDTO 对象转换为一个 SubjectCategoryBO 对象。
+     SubjectCategoryBO convertDtoToCategoryBO(SubjectCategoryDTO subjectCategoryDTO);
 
     SubjectCategoryDTO convertBoToCategoryDTO(SubjectCategoryBO subjectCategoryBO);
 

@@ -4,6 +4,8 @@ import com.qihang.subject.infrastructure.basic.entity.SubjectCategory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import java.util.List;
+
 /**
  * 题目分类(SubjectCategory)表服务接口
  *
@@ -45,4 +47,9 @@ public interface SubjectCategoryService {
      */
     boolean deleteById(Long id);
 
+    /**
+     * 查看分类
+     * @return
+     */
+    List<SubjectCategory> queryPrimaryCategory();
 }

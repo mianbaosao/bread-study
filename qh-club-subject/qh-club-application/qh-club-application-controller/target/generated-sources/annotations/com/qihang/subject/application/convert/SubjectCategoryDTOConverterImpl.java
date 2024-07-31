@@ -6,11 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
 
-@Generated(
-    value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-30T10:00:16+0800",
-    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_291 (Oracle Corporation)"
-)
+
 public class SubjectCategoryDTOConverterImpl implements SubjectCategoryDTOConverter {
 
     @Override

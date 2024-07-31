@@ -100,6 +100,12 @@
             </if>
         </where>
     </select>
+    <select id="queryPrimaryCategory" resultMap="SubjectCategoryMap">
+        select *
+        from subject_category
+        where parent_id = 0
+          and is_deleted = 0
+    </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">

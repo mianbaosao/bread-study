@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="qh-club-domain" />
+        <module name="qh-club-infrastructure" />
+        <module name="qh-club-application-controller" />
+        <module name="qh-club-subject-api" />
+        <module name="qh-club-application-job" />
+        <module name="qh-club-commom" />
+        <module name="qh-club-application-mq" />
+        <module name="qh-club-starter" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="8">
+      <module name="qh-club-application" target="1.5" />
+      <module name="qh-club-application-controller" target="6" />
+      <module name="qh-club-application-job" target="1.5" />
+      <module name="qh-club-application-mq" target="1.5" />
+      <module name="qh-club-commom" target="1.5" />
+      <module name="qh-club-domain" target="8" />
+      <module name="qh-club-infrastructure" target="6" />
+      <module name="qh-club-starter" target="1.5" />
+      <module name="qh-club-subject" target="1.5" />
+      <module name="qh-club-subject-api" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

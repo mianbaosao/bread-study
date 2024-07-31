@@ -1,12 +1,14 @@
 package com.qihang.subject.common.entity;
 
 import com.qihang.subject.common.enums.ResultCodeEnum;
+import lombok.Data;
 
 /**
  * @Description: 结果封装
  * @Author:bread
  * @Date: 2024-07-29 19:47
  */
+@Data
 public class Result<T> {
     private boolean success;
     private Integer code;
@@ -46,41 +48,4 @@ public class Result<T> {
         result.setData(data);
         return result;
     }
-
-    public Result() {
-    }
-
-    public boolean isSuccess() {
-        return this.success;
-    }
-
-    public Integer getCode() {
-        return this.code;
-    }
-
-    public String getMessage() {
-        return this.message;
-    }
-
-    public T getData() {
-        return this.data;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
-
-
 }

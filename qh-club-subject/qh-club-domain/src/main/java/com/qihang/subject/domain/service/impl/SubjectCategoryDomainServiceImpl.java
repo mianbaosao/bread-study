@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Description: 刷题分类实现类
@@ -23,7 +24,10 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
     @Resource
     private SubjectCategoryService subjectCategoryService;
 
-
+    /**
+     * 新增分类
+     * @param subjectCategoryBO
+     */
     @Override
     public void add(SubjectCategoryBO subjectCategoryBO) {
         if (log.isInfoEnabled()) {
@@ -33,6 +37,19 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
                 .convertBoToCategory(subjectCategoryBO);
 
         subjectCategoryService.insert(subjectCategory);
+    }
+
+    /**
+     * 查询分类
+     * @return
+     */
+    @Override
+    public List<SubjectCategoryBO> queryPrimaryCategory() {
+        List<SubjectCategory> subjectCategories = subjectCategoryService.queryPrimaryCategory();
+        List<SubjectCategoryBO> subjectCategoryBOS=SubjectCategoryConverter.INSTANCE
+                .convertBoToCategory(subjectCategories);
+
+        return subjectCategoryBOS;
     }
 
 }

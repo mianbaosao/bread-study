@@ -71,5 +71,10 @@ public interface SubjectCategoryDao {
      */
     int deleteById(Long id);
 
+    /**
+     *
+     * @return
+     */
+    List<SubjectCategory> queryPrimaryCategory();
 }
 

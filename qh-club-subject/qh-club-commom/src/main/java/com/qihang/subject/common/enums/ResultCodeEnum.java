@@ -1,5 +1,7 @@
 package com.qihang.subject.common.enums;
 
+import lombok.Data;
+
 /**
  * @Description: 枚举类
  * @Author:bread
