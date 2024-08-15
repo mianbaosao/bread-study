@@ -21,5 +21,19 @@ public interface SubjectCategoryDomainService {
      * 查询分类
      * @return
      */
-    List<SubjectCategoryBO> queryPrimaryCategory();
+    List<SubjectCategoryBO> queryCategory(SubjectCategoryBO subjectCategoryBO);
+
+    /**
+     * 更新分类
+     * @param subjectCategoryBO
+     * @return
+     */
+    Boolean update(SubjectCategoryBO subjectCategoryBO);
+
+    /**
+     * 删除分类
+     * @param subjectCategoryBO
+     * @return
+     */
+    Boolean delete(SubjectCategoryBO subjectCategoryBO);
 }

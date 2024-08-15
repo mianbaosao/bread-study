@@ -75,6 +75,6 @@ public interface SubjectCategoryDao {
      *
      * @return
      */
-    List<SubjectCategory> queryPrimaryCategory();
+    List<SubjectCategory> queryPrimaryCategory(SubjectCategory subjectCategory);
 }
 

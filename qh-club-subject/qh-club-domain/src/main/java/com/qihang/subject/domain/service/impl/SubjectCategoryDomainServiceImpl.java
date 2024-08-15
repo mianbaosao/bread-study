@@ -1,6 +1,7 @@
 package com.qihang.subject.domain.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.qihang.subject.common.enums.IsDeleteEnum;
 import com.qihang.subject.domain.convert.SubjectCategoryConverter;
 import com.qihang.subject.domain.entity.SubjectCategoryBO;
 import com.qihang.subject.domain.service.SubjectCategoryDomainService;
@@ -35,7 +36,7 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
         }
         SubjectCategory subjectCategory = SubjectCategoryConverter.INSTANCE
                 .convertBoToCategory(subjectCategoryBO);
-
+        subjectCategory.setIsDeleted(IsDeleteEnum.UN_DELETED.getCode());
         subjectCategoryService.insert(subjectCategory);
     }
 
@@ -44,12 +45,41 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
      * @return
      */
     @Override
-    public List<SubjectCategoryBO> queryPrimaryCategory() {
-        List<SubjectCategory> subjectCategories = subjectCategoryService.queryPrimaryCategory();
-        List<SubjectCategoryBO> subjectCategoryBOS=SubjectCategoryConverter.INSTANCE
-                .convertBoToCategory(subjectCategories);
+    public List<SubjectCategoryBO> queryCategory(SubjectCategoryBO subjectCategoryBO) {
+        SubjectCategory subjectCategory=SubjectCategoryConverter.INSTANCE
+                .convertBoToCategory(subjectCategoryBO);
+        subjectCategory.setIsDeleted(IsDeleteEnum.UN_DELETED.getCode());
+        List<SubjectCategory> subjectCategoryList = subjectCategoryService.queryCategory(subjectCategory);
+        List<SubjectCategoryBO> boList=SubjectCategoryConverter.INSTANCE
+                .convertBoToCategory(subjectCategoryList);
 
-        return subjectCategoryBOS;
+        return boList;
+    }
+
+    /**
+     * 更新分类
+     * @param subjectCategoryBO
+     * @return
+     */
+    @Override
+    public Boolean update(SubjectCategoryBO subjectCategoryBO) {
+        SubjectCategory subjectCategory=SubjectCategoryConverter.INSTANCE
+                .convertBoToCategory(subjectCategoryBO);
+        int updateState=subjectCategoryService.update(subjectCategory);
+        return updateState > 0;
+    }
+
+    /**
+     * 删除分类
+     * @param subjectCategoryBO
+     * @return
+     */
+    @Override
+    public Boolean delete(SubjectCategoryBO subjectCategoryBO) {
+        SubjectCategory subjectCategory=SubjectCategoryConverter.INSTANCE
+                .convertBoToCategory(subjectCategoryBO);
+        subjectCategory.setIsDeleted(IsDeleteEnum.DELETED.getCode());
+        return subjectCategoryService.deleteById(subjectCategory.getId());
     }
 
 }

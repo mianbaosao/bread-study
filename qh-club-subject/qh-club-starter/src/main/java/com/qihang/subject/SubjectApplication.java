@@ -11,6 +11,8 @@ import org.springframework.context.annotation.ComponentScan;
  * @Author:bread
  * @Date: 2024-07-25 16:57
  */
+
+
 @SpringBootApplication
 @ComponentScan("com.qihang")
 @MapperScan("com.qihang.**.dao")
