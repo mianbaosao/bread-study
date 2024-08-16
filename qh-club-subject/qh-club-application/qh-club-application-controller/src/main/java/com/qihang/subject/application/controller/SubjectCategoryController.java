@@ -57,9 +57,9 @@ public class SubjectCategoryController {
     public Result<List<SubjectCategoryDTO>> queryPrimaryCategory(@RequestBody SubjectCategoryDTO subjectCategoryDTO){
 
         try {
-            /*if (log.isInfoEnabled()) {
-                log.info("SubjectCategoryController.add.dto:{}", JSON.toJSONString(subjectCategoryDTO));
-            }*/
+            if (log.isInfoEnabled()) {
+                log.info("SubjectCategoryController.queryPrimaryCategory.dto:{}", JSON.toJSONString(subjectCategoryDTO));
+            }
             SubjectCategoryBO subjectCategoryBO=SubjectCategoryDTOConverter.INSTANCE
                     .convertDtoToCategoryBO(subjectCategoryDTO);
             List<SubjectCategoryBO> categoryBOS = subjectCategoryDomainService.queryCategory(subjectCategoryBO);
