@@ -20,6 +20,10 @@ public class SubjectLabelDTO {
      */
     private String labelName;
     /**
+     * 分类id
+     */
+    private Long categoryId;
+    /**
      * 排序
      */
     private Integer sortNum;

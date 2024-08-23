@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Description: 标签控制类
@@ -98,4 +99,26 @@ public class SubjectLabelController {
         }
     }
 
+
+    /**
+     * 根据分类id拆线呢标签
+     * @return
+     */
+    @PostMapping("/queryByCategoryId")
+    public Result<List<SubjectCategoryDTO>> queryByCategoryId(@RequestBody SubjectLabelDTO subjectLabelDTO){
+
+        try {
+            if (log.isInfoEnabled()) {
+                log.info("SubjectLabelController.queryByCategoryId.dto:{}", JSON.toJSONString(subjectLabelDTO));
+            }
+            Preconditions.checkNotNull(subjectLabelDTO.getCategoryId(),"分类Id不能为空");
+            SubjectLabelBO subjectLabelBO=SubjectLabelDTOConverter.INSTANCE.convertDtoToLabelBO(subjectLabelDTO);
+            List<SubjectLabelBO> subjectLabelBOList = subjectLabelDomainService.queryByCategoryId(subjectLabelBO);
+            List<SubjectLabelDTO> resultList=SubjectLabelDTOConverter.INSTANCE.convertBoToLabelDTOList(subjectLabelBOList);
+            return Result.success(resultList);
+        }catch (Exception e){
+            log.error("SubjectCategoryController.update.error:{}", e.getMessage(), e);
+            return Result.fail("查询失败");
+        }
+    }
 }

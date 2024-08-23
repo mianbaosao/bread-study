@@ -21,4 +21,9 @@ public class SubjectLabelBO {
      * 排序
      */
     private Integer sortNum;
+
+    /**
+     * 分类id
+     */
+    private Long categoryId;
 }

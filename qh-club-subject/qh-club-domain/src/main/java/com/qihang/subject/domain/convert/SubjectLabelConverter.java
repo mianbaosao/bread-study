@@ -1,13 +1,13 @@
 package com.qihang.subject.domain.convert;
 
-import com.qihang.subject.domain.entity.SubjectCategoryBO;
-import com.qihang.subject.domain.entity.SubjectLabelBO;
-import com.qihang.subject.infrastructure.basic.entity.SubjectCategory;
-import com.qihang.subject.infrastructure.basic.entity.SubjectLabel;
+
+
+ import com.qihang.subject.domain.entity.SubjectLabelBO;
+ import com.qihang.subject.infrastructure.basic.entity.SubjectLabel;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-import javax.security.auth.Subject;
+
 import java.util.List;
 
 /**
@@ -22,4 +22,5 @@ public interface SubjectLabelConverter {
     SubjectLabel converBoToLabel(SubjectLabelBO subjectLabelBO);
 
     List<SubjectLabelBO> convertBoToLLabel(List<SubjectLabel> LabelList);
+
 }

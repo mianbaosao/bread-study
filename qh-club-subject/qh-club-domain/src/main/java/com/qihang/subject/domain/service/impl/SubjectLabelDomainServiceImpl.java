@@ -4,15 +4,26 @@ import com.alibaba.fastjson.JSON;
 import com.qihang.subject.common.enums.IsDeleteEnum;
 import com.qihang.subject.domain.convert.SubjectCategoryConverter;
 import com.qihang.subject.domain.convert.SubjectLabelConverter;
+import com.qihang.subject.domain.entity.SubjectCategoryBO;
 import com.qihang.subject.domain.entity.SubjectLabelBO;
 import com.qihang.subject.domain.service.SubjectLabelDomainService;
 import com.qihang.subject.infrastructure.basic.entity.SubjectCategory;
 import com.qihang.subject.infrastructure.basic.entity.SubjectLabel;
+import com.qihang.subject.infrastructure.basic.entity.SubjectMapping;
 import com.qihang.subject.infrastructure.basic.service.SubjectLabelService;
+import com.qihang.subject.infrastructure.basic.service.SubjectMappingService;
+import jdk.nashorn.internal.codegen.Label;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
+import javax.security.auth.Subject;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Description: 题目标签
@@ -25,6 +36,10 @@ public class SubjectLabelDomainServiceImpl implements SubjectLabelDomainService 
 
     @Resource
     private SubjectLabelService subjectLabelService;
+
+    @Resource
+    private SubjectMappingService subjectMappingService;
+
     /**
      * 新增标签
      * @param subjectLabelBO
@@ -57,5 +72,30 @@ public class SubjectLabelDomainServiceImpl implements SubjectLabelDomainService 
                 .converBoToLabel(subjectLabelBO);
         subjectLabel.setIsDeleted(IsDeleteEnum.DELETED.getCode());
         return subjectLabelService.deleteById(subjectLabel.getId());
+    }
+
+
+    @Override
+    public List<SubjectLabelBO> queryByCategoryId(SubjectLabelBO subjectLabelBO) {
+        Long categoryId=subjectLabelBO.getCategoryId();
+        SubjectMapping subjectMapping=new SubjectMapping();
+        subjectMapping.setCategoryId(categoryId);
+        subjectMapping.setIsDeleted(IsDeleteEnum.UN_DELETED.getCode());
+        List<SubjectMapping> subjectMappings=subjectMappingService.queryLabelIdListById(subjectMapping);
+        if(CollectionUtils.isEmpty(subjectMappings)){
+            return Collections.emptyList();
+        }
+        List<Long>LabelIds=subjectMappings.stream().map(SubjectMapping::getLabelId).collect(Collectors.toList());
+        List<SubjectLabel> subjectLabelList=subjectLabelService.batchQueryById(LabelIds);
+        List<SubjectLabelBO> subjectLabelBOList=new LinkedList<>();
+       subjectLabelList.forEach(Label->{
+           SubjectLabelBO bo=new SubjectLabelBO();
+           bo.setId(Label.getId());
+           bo.setCategoryId(categoryId);
+           bo.setLabelName(Label.getLabelName());
+           bo.setSortNum(Label.getSortNum());
+           subjectLabelBOList.add(bo);
+       });
+        return subjectLabelBOList;
     }
 }

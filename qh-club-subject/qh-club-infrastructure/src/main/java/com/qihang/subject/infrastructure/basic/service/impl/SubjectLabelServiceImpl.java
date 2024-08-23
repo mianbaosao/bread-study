@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 题目标签表(SubjectLabel)表服务实现类
@@ -64,5 +65,15 @@ public class SubjectLabelServiceImpl implements SubjectLabelService {
     @Override
     public boolean deleteById(Long id) {
         return this.subjectLabelDao.deleteById(id) > 0;
+    }
+
+    /**
+     * 批量id查找数据
+     * @param labelIds
+     * @return
+     */
+    @Override
+    public List<SubjectLabel> batchQueryById(List<Long> labelIds) {
+        return this.subjectLabelDao.batchQueryById(labelIds);
     }
 }

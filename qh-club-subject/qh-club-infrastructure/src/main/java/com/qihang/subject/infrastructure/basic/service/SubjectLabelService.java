@@ -4,6 +4,8 @@ import com.qihang.subject.infrastructure.basic.entity.SubjectLabel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import java.util.List;
+
 /**
  * 题目标签表(SubjectLabel)表服务接口
  *
@@ -46,4 +48,10 @@ public interface SubjectLabelService {
      */
     boolean deleteById(Long id);
 
+    /**
+     * 批量查找数据
+     * @param labelIds
+     * @return
+     */
+    List<SubjectLabel> batchQueryById(List<Long> labelIds);
 }

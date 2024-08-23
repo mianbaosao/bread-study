@@ -6,28 +6,30 @@ import java.util.Date;
 import java.io.Serializable;
 
 /**
- * 题目标签表(SubjectLabel)实体类
+ * 题目分类关系表(SubjectMapping)实体类
  *
- * @author bread
- * @since 2024-08-21 17:16:31
+ * @author makejava
+ * @since 2024-08-23 15:29:56
  */
 @Data
-public class SubjectLabel implements Serializable {
-    private static final long serialVersionUID = 570950792259414931L;
+public class SubjectMapping implements Serializable {
+    private static final long serialVersionUID = 607469118977030248L;
     /**
      * 主键
      */
     private Long id;
     /**
-     * 标签分类
+     * 题目id
      */
-    private String labelName;
+    private Long subjectId;
     /**
-     * 排序
+     * 分类id
      */
-    private Integer sortNum;
-    
-    private String categoryId;
+    private Long categoryId;
+    /**
+     * 标签id
+     */
+    private Long labelId;
     /**
      * 创建人
      */
@@ -37,15 +39,16 @@ public class SubjectLabel implements Serializable {
      */
     private Date createdTime;
     /**
-     * 更新人
+     * 修改人
      */
     private String updateBy;
     /**
-     * 更新时间
+     * 修改时间
      */
     private Date updateTime;
     
     private Integer isDeleted;
+
 
 
 }

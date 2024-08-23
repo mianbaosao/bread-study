@@ -1,6 +1,9 @@
 package com.qihang.subject.domain.service;
 
+import com.qihang.subject.domain.entity.SubjectCategoryBO;
 import com.qihang.subject.domain.entity.SubjectLabelBO;
+
+import java.util.List;
 
 /**
  * @Description: 题目标签
@@ -28,4 +31,11 @@ public interface SubjectLabelDomainService {
      * @return
      */
     Boolean delete(SubjectLabelBO subjectLabelBO);
+
+    /**
+     * 根据分类id查询标签
+     * @param subjectLabelBO
+     * @return
+     */
+    List<SubjectLabelBO> queryByCategoryId(SubjectLabelBO subjectLabelBO);
 }

@@ -8,7 +8,7 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-08-21T18:01:48+0800",
+    date = "2024-08-23T16:26:49+0800",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_291 (Oracle Corporation)"
 )
 public class SubjectLabelDTOConverterImpl implements SubjectLabelDTOConverter {
@@ -38,6 +38,7 @@ public class SubjectLabelDTOConverterImpl implements SubjectLabelDTOConverter {
         subjectLabelBO.setId( subjectLabelDTO.getId() );
         subjectLabelBO.setLabelName( subjectLabelDTO.getLabelName() );
         subjectLabelBO.setSortNum( subjectLabelDTO.getSortNum() );
+        subjectLabelBO.setCategoryId( subjectLabelDTO.getCategoryId() );
 
         return subjectLabelBO;
     }
@@ -52,8 +53,23 @@ public class SubjectLabelDTOConverterImpl implements SubjectLabelDTOConverter {
 
         subjectLabelDTO.setId( subjectLabelBO.getId() );
         subjectLabelDTO.setLabelName( subjectLabelBO.getLabelName() );
+        subjectLabelDTO.setCategoryId( subjectLabelBO.getCategoryId() );
         subjectLabelDTO.setSortNum( subjectLabelBO.getSortNum() );
 
         return subjectLabelDTO;
+    }
+
+    @Override
+    public List<SubjectLabelBO> convertDTOToBOList(List<SubjectLabelDTO> subjectLabelDTOList) {
+        if ( subjectLabelDTOList == null ) {
+            return null;
+        }
+
+        List<SubjectLabelBO> list = new ArrayList<SubjectLabelBO>( subjectLabelDTOList.size() );
+        for ( SubjectLabelDTO subjectLabelDTO : subjectLabelDTOList ) {
+            list.add( convertDtoToLabelBO( subjectLabelDTO ) );
+        }
+
+        return list;
     }
 }
