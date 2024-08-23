@@ -100,7 +100,7 @@ public class SubjectCategoryController {
     }
 
     /**
-     * 更新分类
+     * 更新分类操作
      * @return
      */
     @PostMapping("/update")
