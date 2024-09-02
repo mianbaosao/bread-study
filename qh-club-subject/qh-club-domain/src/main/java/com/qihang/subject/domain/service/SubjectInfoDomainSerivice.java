@@ -13,5 +13,5 @@ public interface SubjectInfoDomainSerivice {
      * @param subjectInfoBO
      * @return
      */
-    Boolean add(SubjectInfoBO subjectInfoBO);
+    void add(SubjectInfoBO subjectInfoBO);
 }

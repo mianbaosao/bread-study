@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 题目信息表(SubjectInfo)表服务实现类
@@ -67,5 +68,10 @@ public class SubjectInfoServiceImpl implements SubjectInfoService {
     @Override
     public boolean deleteById(Long id) {
         return this.subjectInfoDao.deleteById(id) > 0;
+    }
+
+    @Override
+    public void batchInsert(List<SubjectInfo> subjectInfoList) {
+        this.subjectInfoDao.insertBatch(subjectInfoList);
     }
 }

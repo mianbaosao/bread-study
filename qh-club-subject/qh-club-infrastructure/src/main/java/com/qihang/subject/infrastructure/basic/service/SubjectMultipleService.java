@@ -4,6 +4,8 @@ import com.qihang.subject.infrastructure.basic.entity.SubjectMultiple;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import java.util.List;
+
 /**
  * 多选题信息表(SubjectMultiple)表服务接口
  *
@@ -53,4 +55,5 @@ public interface SubjectMultipleService {
      */
     boolean deleteById(Long id);
 
+    void batchInsert(List<SubjectMultiple> subjectMultipleList);
 }

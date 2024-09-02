@@ -4,6 +4,8 @@ import com.qihang.subject.infrastructure.basic.entity.SubjectInfo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import java.util.List;
+
 /**
  * 题目信息表(SubjectInfo)表服务接口
  *
@@ -44,4 +46,5 @@ public interface SubjectInfoService {
      */
     boolean deleteById(Long id);
 
+    void batchInsert(List<SubjectInfo> subjectInfoList);
 }

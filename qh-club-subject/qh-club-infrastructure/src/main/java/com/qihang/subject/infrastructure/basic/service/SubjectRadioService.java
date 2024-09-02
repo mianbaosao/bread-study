@@ -4,6 +4,8 @@ import com.qihang.subject.infrastructure.basic.entity.SubjectRadio;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import java.util.List;
+
 /**
  * 单选题信息表(SubjectRadio)表服务接口
  *
@@ -29,6 +31,7 @@ public interface SubjectRadioService {
      */
     SubjectRadio insert(SubjectRadio subjectRadio);
 
+
     /**
      * 修改数据
      *
@@ -45,4 +48,9 @@ public interface SubjectRadioService {
      */
     boolean deleteById(Long id);
 
+    /**
+     * 批量插入
+     * @param subjectRadioList
+     */
+    void batchInsert(List<SubjectRadio> subjectRadioList);
 }

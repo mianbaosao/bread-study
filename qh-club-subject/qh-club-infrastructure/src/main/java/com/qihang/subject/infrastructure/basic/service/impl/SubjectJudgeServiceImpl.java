@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 判断题(SubjectJudge)表服务实现类
@@ -66,5 +67,10 @@ public class SubjectJudgeServiceImpl implements SubjectJudgeService {
     @Override
     public boolean deleteById(Long id) {
         return this.subjectJudgeDao.deleteById(id) > 0;
+    }
+
+    @Override
+    public void batchInsert(List<SubjectJudge> subjectJudgeList) {
+        this.subjectJudgeDao.insertBatch(subjectJudgeList);
     }
 }

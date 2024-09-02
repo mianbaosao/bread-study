@@ -54,8 +54,8 @@ public class SubjectController {
             List<SubjectAnswerBO> subjectAnswerBOS= SubjectAnswerDTOConverter.
                     INSTANCE.convertDTOToBOList(subjectInfoDTO.getOptionList());
             subjectInfoBO.setOptionList(subjectAnswerBOS);
-          Boolean res =  subjectInfoDomainSerivice.add(subjectInfoBO);
-            return Result.success(res);
+           subjectInfoDomainSerivice.add(subjectInfoBO);
+            return Result.success(true);
         } catch (Exception e) {
             log.error("SubjectCategoryController.add.error:{}", e.getMessage(), e);
             return Result.fail("新增标签失败");
