@@ -1,5 +1,6 @@
 package com.qihang.subject.application.dto;
 
+import com.qihang.subject.common.entity.PageInfo;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -13,7 +14,7 @@ import java.util.List;
  * @since 2024-08-26 15:54:40
  */
 @Data
-public class SubjectInfoDTO implements Serializable {
+public class SubjectInfoDTO extends PageInfo implements Serializable {
     /**
      * 主键
      */
@@ -59,6 +60,10 @@ public class SubjectInfoDTO implements Serializable {
      * 题目答案列表
      */
     private List<SubjectAnswerDTO>optionList;
+
+    private Long categoryId;
+
+    private Long labelId;
 
 }
 

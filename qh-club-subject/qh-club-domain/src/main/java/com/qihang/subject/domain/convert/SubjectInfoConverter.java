@@ -4,6 +4,7 @@ package com.qihang.subject.domain.convert;
 import com.qihang.subject.domain.entity.SubjectAnswerBO;
 import com.qihang.subject.domain.entity.SubjectInfoBO;
 import com.qihang.subject.domain.entity.SubjectLabelBO;
+import com.qihang.subject.domain.entity.SubjectOptionBO;
 import com.qihang.subject.infrastructure.basic.entity.SubjectInfo;
 import com.qihang.subject.infrastructure.basic.entity.SubjectLabel;
 import org.mapstruct.Mapper;
@@ -26,4 +27,5 @@ public interface SubjectInfoConverter {
 
     List<SubjectInfoBO> convertBoToLInfo(List<SubjectInfo> infoList);
 
+    SubjectInfoBO convertOptionAndInfoToBo(SubjectOptionBO subjectOptionBO, SubjectInfo subjectInfo);
 }

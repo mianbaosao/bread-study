@@ -19,20 +19,14 @@ public enum SubjectInfoTypeEnum {
         this.desc = desc;
     }
 
-    public static SubjectInfoTypeEnum getBycode(int codeVal) {
-        SubjectInfoTypeEnum[] var1 = values();
-        int var2 = var1.length;
-
-        for(int var3 = 0; var3 < var2; ++var3) {
-            SubjectInfoTypeEnum resultCodeEnum = var1[var3];
-            if (resultCodeEnum.code == codeVal) {
+    public static SubjectInfoTypeEnum getByCode(int codeVal){
+        for(SubjectInfoTypeEnum resultCodeEnum : SubjectInfoTypeEnum.values()){
+            if(resultCodeEnum.code == codeVal){
                 return resultCodeEnum;
             }
         }
-
         return null;
     }
-
     public int getCode() {
         return this.code;
     }

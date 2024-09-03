@@ -2,6 +2,7 @@ package com.qihang.subject.domain.handler.subject;
 
 import com.qihang.subject.common.enums.SubjectInfoTypeEnum;
 import com.qihang.subject.domain.entity.SubjectInfoBO;
+import com.qihang.subject.domain.entity.SubjectOptionBO;
 import com.qihang.subject.infrastructure.basic.entity.SubjectInfo;
 
 /**
@@ -16,4 +17,6 @@ public interface SubjectTypeHandler {
      * 实际的题目增加
      */
     void add(SubjectInfoBO subjectInfoBO);
+
+    SubjectOptionBO query(int subjectId);
 }

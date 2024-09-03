@@ -6,6 +6,8 @@ import com.qihang.subject.infrastructure.basic.entity.SubjectRadio;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 /**
  * @Description: 单选题目BO转PO
  * @Author:bread
@@ -17,6 +19,6 @@ public interface RadioSubjectConverter {
 
     SubjectRadio converBoToRadio(SubjectAnswerBO subjectAnswerBO);
 
-
+    List<SubjectAnswerBO> convertEntityToBoList(List<SubjectRadio> subjectRadioList);
 
 }

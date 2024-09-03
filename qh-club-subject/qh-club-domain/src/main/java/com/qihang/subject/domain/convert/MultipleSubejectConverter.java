@@ -6,6 +6,8 @@ import com.qihang.subject.infrastructure.basic.entity.SubjectMultiple;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 /**
  * @Description: 多选题转化
  * @Author:bread
@@ -16,4 +18,6 @@ public interface MultipleSubejectConverter {
     MultipleSubejectConverter INSTANCE= Mappers.getMapper(MultipleSubejectConverter.class);
 
     SubjectMultiple converAnswerBoToJudge(SubjectAnswerBO subjectAnswerBO);
+
+    List<SubjectAnswerBO> convertEntityToBoList(List<SubjectMultiple> subjectMultipleList);
 }

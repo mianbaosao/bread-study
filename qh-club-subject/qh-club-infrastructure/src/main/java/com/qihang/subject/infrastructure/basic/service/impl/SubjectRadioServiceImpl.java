@@ -72,4 +72,10 @@ public class SubjectRadioServiceImpl implements SubjectRadioService {
     public void batchInsert(List<SubjectRadio> subjectRadioList) {
         this.subjectRadioDao.insertBatch(subjectRadioList);
     }
+
+    @Override
+    public List<SubjectRadio> queryByCondition(SubjectRadio subjectRadio) {
+        return this.subjectRadioDao.queryAllByLimit(subjectRadio);
+
+    }
 }

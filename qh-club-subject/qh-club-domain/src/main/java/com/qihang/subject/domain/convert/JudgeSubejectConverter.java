@@ -5,6 +5,8 @@ import com.qihang.subject.infrastructure.basic.entity.SubjectJudge;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 /**
  * @Description: 判断题题转化
  * @Author:bread
@@ -15,4 +17,7 @@ public interface JudgeSubejectConverter {
     JudgeSubejectConverter INSTANCE= Mappers.getMapper(JudgeSubejectConverter.class);
 
     SubjectJudge converAnswerBoToJudge(SubjectAnswerBO subjectAnswerBO);
+
+    List<SubjectAnswerBO> convertEntityToBoList(List<SubjectJudge> subjectJudgeList);
+
 }

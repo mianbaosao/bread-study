@@ -4,10 +4,13 @@ import com.google.common.base.Preconditions;
 import com.qihang.subject.common.enums.SubjectInfoTypeEnum;
 import com.qihang.subject.domain.convert.JudgeSubejectConverter;
 import com.qihang.subject.domain.convert.MultipleSubejectConverter;
+import com.qihang.subject.domain.entity.SubjectAnswerBO;
 import com.qihang.subject.domain.entity.SubjectInfoBO;
+import com.qihang.subject.domain.entity.SubjectOptionBO;
 import com.qihang.subject.infrastructure.basic.entity.SubjectJudge;
 import com.qihang.subject.infrastructure.basic.entity.SubjectMultiple;
 import com.qihang.subject.infrastructure.basic.service.SubjectMultipleService;
+import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
@@ -19,6 +22,7 @@ import java.util.List;
  * @Author:bread
  * @Date: 2024-08-26 17:34
  */
+@Component
 public class MultipleTypeHandler implements SubjectTypeHandler{
 
     @Resource
@@ -40,5 +44,16 @@ public class MultipleTypeHandler implements SubjectTypeHandler{
             subjectMultipleList.add(subjectMultiple);
         });
         subjectMultipleService.batchInsert(subjectMultipleList);
+    }
+
+    @Override
+    public SubjectOptionBO query(int subjectId) {
+        SubjectMultiple subjectMultiple = new SubjectMultiple();
+        subjectMultiple.setSubjectId(Long.valueOf(subjectId));
+        List<SubjectMultiple> result = subjectMultipleService.queryByCondition(subjectMultiple);
+        List<SubjectAnswerBO> subjectAnswerBOList = MultipleSubejectConverter.INSTANCE.convertEntityToBoList(result);
+        SubjectOptionBO subjectOptionBO = new SubjectOptionBO();
+        subjectOptionBO.setOptionList(subjectAnswerBOList);
+        return subjectOptionBO;
     }
 }

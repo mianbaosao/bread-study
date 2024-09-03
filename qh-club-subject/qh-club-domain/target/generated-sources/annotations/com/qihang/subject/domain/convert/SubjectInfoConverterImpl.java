@@ -2,6 +2,7 @@ package com.qihang.subject.domain.convert;
 
 import com.qihang.subject.domain.entity.SubjectAnswerBO;
 import com.qihang.subject.domain.entity.SubjectInfoBO;
+import com.qihang.subject.domain.entity.SubjectOptionBO;
 import com.qihang.subject.infrastructure.basic.entity.SubjectInfo;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,13 +10,32 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-09-02T15:12:04+0800",
+    date = "2024-09-03T20:58:54+0800",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_291 (Oracle Corporation)"
 )
 public class SubjectInfoConverterImpl implements SubjectInfoConverter {
 
     @Override
-    public SubjectInfo converBoToInfo(SubjectAnswerBO subjectAnswerBO) {
+    public SubjectInfo converBoToInfo(SubjectInfoBO subjectInfoBO) {
+        if ( subjectInfoBO == null ) {
+            return null;
+        }
+
+        SubjectInfo subjectInfo = new SubjectInfo();
+
+        subjectInfo.setId( subjectInfoBO.getId() );
+        subjectInfo.setSubjectName( subjectInfoBO.getSubjectName() );
+        subjectInfo.setSubjectDifficult( subjectInfoBO.getSubjectDifficult() );
+        subjectInfo.setSettleName( subjectInfoBO.getSettleName() );
+        subjectInfo.setSubjectType( subjectInfoBO.getSubjectType() );
+        subjectInfo.setSubjectScore( subjectInfoBO.getSubjectScore() );
+        subjectInfo.setSubjectParse( subjectInfoBO.getSubjectParse() );
+
+        return subjectInfo;
+    }
+
+    @Override
+    public SubjectInfo converAnserBoToInfo(SubjectAnswerBO subjectAnswerBO) {
         if ( subjectAnswerBO == null ) {
             return null;
         }
@@ -37,6 +57,34 @@ public class SubjectInfoConverterImpl implements SubjectInfoConverter {
         }
 
         return list;
+    }
+
+    @Override
+    public SubjectInfoBO convertOptionAndInfoToBo(SubjectOptionBO subjectOptionBO, SubjectInfo subjectInfo) {
+        if ( subjectOptionBO == null && subjectInfo == null ) {
+            return null;
+        }
+
+        SubjectInfoBO subjectInfoBO = new SubjectInfoBO();
+
+        if ( subjectOptionBO != null ) {
+            subjectInfoBO.setSubjectAnswer( subjectOptionBO.getSubjectAnswer() );
+            List<SubjectAnswerBO> list = subjectOptionBO.getOptionList();
+            if ( list != null ) {
+                subjectInfoBO.setOptionList( new ArrayList<SubjectAnswerBO>( list ) );
+            }
+        }
+        if ( subjectInfo != null ) {
+            subjectInfoBO.setId( subjectInfo.getId() );
+            subjectInfoBO.setSubjectName( subjectInfo.getSubjectName() );
+            subjectInfoBO.setSubjectDifficult( subjectInfo.getSubjectDifficult() );
+            subjectInfoBO.setSettleName( subjectInfo.getSettleName() );
+            subjectInfoBO.setSubjectType( subjectInfo.getSubjectType() );
+            subjectInfoBO.setSubjectScore( subjectInfo.getSubjectScore() );
+            subjectInfoBO.setSubjectParse( subjectInfo.getSubjectParse() );
+        }
+
+        return subjectInfoBO;
     }
 
     protected SubjectInfoBO subjectInfoToSubjectInfoBO(SubjectInfo subjectInfo) {

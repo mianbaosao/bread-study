@@ -1,11 +1,15 @@
 package com.qihang.subject.domain.handler.subject;
 
 import com.google.common.base.Preconditions;
+import com.qihang.subject.common.enums.IsDeleteEnum;
 import com.qihang.subject.common.enums.SubjectInfoTypeEnum;
 import com.qihang.subject.domain.convert.RadioSubjectConverter;
+import com.qihang.subject.domain.entity.SubjectAnswerBO;
 import com.qihang.subject.domain.entity.SubjectInfoBO;
+import com.qihang.subject.domain.entity.SubjectOptionBO;
 import com.qihang.subject.infrastructure.basic.entity.SubjectRadio;
 import com.qihang.subject.infrastructure.basic.service.SubjectRadioService;
+import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
@@ -17,6 +21,7 @@ import java.util.List;
  * @Author:bread
  * @Date: 2024-08-26 17:32
  */
+@Component
 public class RadioTypeHandler implements SubjectTypeHandler{
 
     @Resource
@@ -35,8 +40,21 @@ public class RadioTypeHandler implements SubjectTypeHandler{
         subjectInfoBO.getOptionList().forEach(option->{
             SubjectRadio subjectRadio = RadioSubjectConverter.INSTANCE.converBoToRadio(option);
             subjectRadio.setSubjectId(subjectInfoBO.getId());
+            subjectRadio.setIsDeleted(IsDeleteEnum.UN_DELETED.getCode());
             subjectRadioList.add(subjectRadio);
         });
         subjectRadioService.batchInsert(subjectRadioList);
     }
+
+    @Override
+    public SubjectOptionBO query(int subjectId) {
+        SubjectRadio subjectRadio = new SubjectRadio();
+        subjectRadio.setSubjectId(Long.valueOf(subjectId));
+        List<SubjectRadio> result = subjectRadioService.queryByCondition(subjectRadio);
+        List<SubjectAnswerBO> subjectAnswerBOList = RadioSubjectConverter.INSTANCE.convertEntityToBoList(result);
+        SubjectOptionBO subjectOptionBO = new SubjectOptionBO();
+        subjectOptionBO.setOptionList(subjectAnswerBOList);
+        return subjectOptionBO;
+    }
+
 }

@@ -74,4 +74,14 @@ public class SubjectInfoServiceImpl implements SubjectInfoService {
     public void batchInsert(List<SubjectInfo> subjectInfoList) {
         this.subjectInfoDao.insertBatch(subjectInfoList);
     }
+
+    @Override
+    public int countByCondition(SubjectInfo subjectInfo, Long categoryId, Long labelId) {
+        return this.subjectInfoDao.countByCondition(subjectInfo,categoryId,labelId);
+    }
+
+    @Override
+    public List<SubjectInfo> queryPage(SubjectInfo subjectInfo, Long categoryId, Long labelId, int start, Integer pageSize) {
+        return this.subjectInfoDao.queryPage(subjectInfo,categoryId,labelId,start,pageSize);
+    }
 }

@@ -53,4 +53,6 @@ public interface SubjectRadioService {
      * @param subjectRadioList
      */
     void batchInsert(List<SubjectRadio> subjectRadioList);
+
+    List<SubjectRadio> queryByCondition(SubjectRadio subjectRadio);
 }

@@ -1,4 +1,4 @@
-package com.qihang.subject.domain.handler.subject.factory;
+package com.qihang.subject.domain.handler.subject;
 
 import com.qihang.subject.common.enums.SubjectInfoTypeEnum;
 import com.qihang.subject.domain.handler.subject.SubjectTypeHandler;
@@ -22,12 +22,14 @@ public class SubjectHandlerTypeFactory implements InitializingBean {
     @Resource
     private List<SubjectTypeHandler>subjectTypeHandlerList;
 
+
     private Map<SubjectInfoTypeEnum,SubjectTypeHandler> handlerMap=new HashMap<>();
 
-    public SubjectTypeHandler getHandler(int type){
-        SubjectInfoTypeEnum subjectInfoTypeEnum = SubjectInfoTypeEnum.getBycode(type);
+    public SubjectTypeHandler getHandler(int subjectType) {
+        SubjectInfoTypeEnum subjectInfoTypeEnum = SubjectInfoTypeEnum.getByCode(subjectType);
         return handlerMap.get(subjectInfoTypeEnum);
     }
+
 
 
     @Override
