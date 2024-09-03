@@ -36,7 +36,6 @@ public class RadioTypeHandler implements SubjectTypeHandler{
         //单选题目的插入
         List<SubjectRadio> subjectRadioList=new LinkedList<>();
         Preconditions.checkNotNull(!CollectionUtils.isEmpty(subjectInfoBO.getOptionList()),"列表不能为空");
-
         subjectInfoBO.getOptionList().forEach(option->{
             SubjectRadio subjectRadio = RadioSubjectConverter.INSTANCE.converBoToRadio(option);
             subjectRadio.setSubjectId(subjectInfoBO.getId());
