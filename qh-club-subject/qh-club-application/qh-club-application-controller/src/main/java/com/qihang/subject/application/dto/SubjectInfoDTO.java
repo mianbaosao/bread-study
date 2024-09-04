@@ -48,18 +48,26 @@ public class SubjectInfoDTO extends PageInfo implements Serializable {
      * 题目答案
      */
     private String subjectAnswer;
+
     /**
      * 分类id
      */
-    private List<Long>categoryIds;
+    private List<Integer> categoryIds;
+
     /**
      * 标签id
      */
-    private List<Long>labelIds;
+    private List<Integer> labelIds;
+
     /**
-     * 题目答案列表
+     * 答案选项
      */
-    private List<SubjectAnswerDTO>optionList;
+    private List<SubjectAnswerDTO> optionList;
+
+    /**
+     * 标签name
+     */
+    private List<String> labelName;
 
     private Long categoryId;
 

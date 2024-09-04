@@ -115,33 +115,50 @@
         </where>
     </select>
     <select id="countByCondition" resultType="java.lang.Integer">
-        select count(1) from subject_info a,subject_mapping b
-        where a.subject_difficult = #{subjectInfo.subjectDifficult}
-        and b.category_id=#{categoryId}
-        and b.label_id=#{labelId}
-        and a.is_deleted=0
-        and b.is_deleted=0
+        select count(1)
+        from subject_info a,
+        subject_mapping b
+        where
+        a.id = b.subject_id
+        and b.category_id = #{categoryId}
+        and b.label_id = #{labelId}
+        and a.is_deleted = 0
+        and b.is_deleted = 0
+        <if test="subjectInfo.subjectDifficult != null">
+            and a.subject_difficult = #{subjectInfo.subjectDifficult}
+        </if>
+        <if test="subjectInfo.subjectType != null">
+            and a.subject_type = #{subjectInfo.subjectType}
+        </if>
     </select>
     <select id="queryPage" resultMap="SubjectInfoMap">
-        select id,
-               subject_name,
-               subject_difficult,
-               settle_name,
-               subject_type,
-               subject_score,
-               subject_parse,
-               created_by,
-               created_time,
-               update_by,
-               update_time,
-               is_deleted
+        select a.id,
+        a.subject_name,
+        a.subject_difficult,
+        a.settle_name,
+        a.subject_type,
+        a.subject_score,
+        a.subject_parse,
+        a.created_by,
+        a.created_time,
+        a.update_by,
+        a.update_time,
+        a.is_deleted
         from subject_info a,
-             subject_mapping b
-        where a.subject_difficult = #{subjectInfo.subjectDifficult}
-          and b.category_id = #{categoryId}
-          and b.label_id = #{labelId}
-          and a.is_deleted = 0
-          and b.is_deleted = 0
+        subject_mapping b
+        where
+        a.id = b.subject_id
+        and b.category_id = #{categoryId}
+        and b.label_id = #{labelId}
+        and a.is_deleted = 0
+        and b.is_deleted = 0
+        <if test="subjectInfo.subjectDifficult != null">
+            and a.subject_difficult = #{subjectInfo.subjectDifficult}
+        </if>
+        <if test="subjectInfo.subjectType != null">
+            and a.subject_type = #{subjectInfo.subjectType}
+        </if>
+        limit #{start},#{pageSize}
     </select>
 
     <!--新增所有列-->

@@ -78,18 +78,24 @@ public class SubjectInfoDomainServiceImpl implements SubjectInfoDomainService {
         pageResult.setPageSize(subjectInfoBO.getPageSize());
         int start = (subjectInfoBO.getPageNo() - 1) * subjectInfoBO.getPageSize();
         SubjectInfo subjectInfo = SubjectInfoConverter.INSTANCE.converBoToInfo(subjectInfoBO);
-        int count = subjectInfoService.countByCondition(subjectInfo, subjectInfoBO.getCategoryId(), subjectInfoBO.getLabelId());
-        if(count==0){
+        int count = subjectInfoService.countByCondition(subjectInfo, subjectInfoBO.getCategoryId()
+                , subjectInfoBO.getLabelId());
+        if (count == 0) {
             return pageResult;
         }
-       List<SubjectInfo> subjectInfoList =  subjectInfoService.queryPage(subjectInfo,
-                subjectInfoBO.getCategoryId(),
-                subjectInfoBO.getLabelId(),
-                start,
-                subjectInfoBO.getPageSize()
-                );
-        List<SubjectInfoBO> subjectInfoBOList = SubjectInfoConverter.INSTANCE.convertBoToLInfo(subjectInfoList);
-        pageResult.setResult(subjectInfoBOList);
+        List<SubjectInfo> subjectInfoList = subjectInfoService.queryPage(subjectInfo, subjectInfoBO.getCategoryId()
+                , subjectInfoBO.getLabelId(), start, subjectInfoBO.getPageSize());
+        List<SubjectInfoBO> subjectInfoBOS = SubjectInfoConverter.INSTANCE.convertBoToLInfo(subjectInfoList);
+        subjectInfoBOS.forEach(info -> {
+            SubjectMapping subjectMapping = new SubjectMapping();
+            subjectMapping.setSubjectId(info.getId());
+            List<SubjectMapping> mappingList = subjectMappingService.queryLabelId(subjectMapping);
+            List<Long> labelIds = mappingList.stream().map(SubjectMapping::getLabelId).collect(Collectors.toList());
+            List<SubjectLabel> labelList = subjectLabelService.batchQueryById(labelIds);
+            List<String> labelNames = labelList.stream().map(SubjectLabel::getLabelName).collect(Collectors.toList());
+            info.setLabelName(labelNames);
+        });
+        pageResult.setResult(subjectInfoBOS);
         pageResult.setTotal(count);
         return pageResult;
     }
@@ -103,7 +109,7 @@ public class SubjectInfoDomainServiceImpl implements SubjectInfoDomainService {
         SubjectMapping subjectMapping = new SubjectMapping();
         subjectMapping.setSubjectId(subjectInfo.getId());
         subjectMapping.setIsDeleted(IsDeleteEnum.UN_DELETED.getCode());
-        List<SubjectMapping> mappingList = subjectMappingService.queryLabelId(subjectMapping);
+        List<SubjectMapping> mappingList = subjectMappingService.queryLabelIdListById(subjectMapping);
         List<Long> labelIdList = mappingList.stream().map(SubjectMapping::getLabelId).collect(Collectors.toList());
         List<SubjectLabel> labelList = subjectLabelService.batchQueryById(labelIdList);
         List<String> labelNameList = labelList.stream().map(SubjectLabel::getLabelName).collect(Collectors.toList());

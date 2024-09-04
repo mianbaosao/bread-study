@@ -12,11 +12,10 @@
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
         <result property="isDeleted" column="is_deleted" jdbcType="INTEGER"/>
     </resultMap>
-
     <!--查询单个-->
     <select id="queryById" resultMap="SubjectBriefMap">
         select
-          id, subject_id, subject_answer, created_by, created_time, update_by, update_time, is_deleted
+            id, subject_id, subject_answer, created_by, created_time, update_by, update_time, is_deleted
         from subject_brief
         where id = #{id}
     </select>
@@ -24,7 +23,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="SubjectBriefMap">
         select
-          id, subject_id, subject_answer, created_by, created_time, update_by, update_time, is_deleted
+        id, subject_id, subject_answer, created_by, created_time, update_by, update_time, is_deleted
         from subject_brief
         <where>
             <if test="id != null">
@@ -52,7 +51,6 @@
                 and is_deleted = #{isDeleted}
             </if>
         </where>
-        limit #{pageable.offset}, #{pageable.pageSize}
     </select>
 
     <!--统计总行数-->
@@ -97,7 +95,7 @@
         insert into subject_brief(subject_id, subject_answer, created_by, created_time, update_by, update_time, is_deleted)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.subjectId}, #{entity.subjectAnswer}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
+            (#{entity.subjectId}, #{entity.subjectAnswer}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
         </foreach>
     </insert>
 
@@ -150,6 +148,7 @@
     <delete id="deleteById">
         delete from subject_brief where id = #{id}
     </delete>
+
 
 </mapper>
 

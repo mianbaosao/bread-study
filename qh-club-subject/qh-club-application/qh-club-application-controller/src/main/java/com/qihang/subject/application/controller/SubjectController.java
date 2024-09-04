@@ -83,7 +83,7 @@ public class SubjectController {
             return Result.success(boPageResult);
         } catch (Exception e) {
             log.error("SubjectCategoryController.add.error:{}", e.getMessage(), e);
-            return Result.fail("新增标签失败");
+            return Result.fail("查询分页失败");
         }
     }
     /**
