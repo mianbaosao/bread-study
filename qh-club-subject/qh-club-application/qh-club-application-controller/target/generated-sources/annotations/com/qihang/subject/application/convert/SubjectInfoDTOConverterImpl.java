@@ -10,7 +10,7 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-09-03T21:01:43+0800",
+    date = "2024-09-04T22:19:05+0800",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_291 (Oracle Corporation)"
 )
 public class SubjectInfoDTOConverterImpl implements SubjectInfoDTOConverter {
@@ -45,13 +45,11 @@ public class SubjectInfoDTOConverterImpl implements SubjectInfoDTOConverter {
         subjectInfoBO.setSubjectScore( subjectInfoDTO.getSubjectScore() );
         subjectInfoBO.setSubjectParse( subjectInfoDTO.getSubjectParse() );
         subjectInfoBO.setSubjectAnswer( subjectInfoDTO.getSubjectAnswer() );
-        List<Long> list = subjectInfoDTO.getCategoryIds();
-        if ( list != null ) {
-            subjectInfoBO.setCategoryIds( new ArrayList<Long>( list ) );
-        }
-        List<Long> list1 = subjectInfoDTO.getLabelIds();
-        if ( list1 != null ) {
-            subjectInfoBO.setLabelIds( new ArrayList<Long>( list1 ) );
+        subjectInfoBO.setCategoryIds( integerListToLongList( subjectInfoDTO.getCategoryIds() ) );
+        subjectInfoBO.setLabelIds( integerListToLongList( subjectInfoDTO.getLabelIds() ) );
+        List<String> list2 = subjectInfoDTO.getLabelName();
+        if ( list2 != null ) {
+            subjectInfoBO.setLabelName( new ArrayList<String>( list2 ) );
         }
         subjectInfoBO.setOptionList( subjectAnswerDTOListToSubjectAnswerBOList( subjectInfoDTO.getOptionList() ) );
         subjectInfoBO.setCategoryId( subjectInfoDTO.getCategoryId() );
@@ -76,15 +74,13 @@ public class SubjectInfoDTOConverterImpl implements SubjectInfoDTOConverter {
         subjectInfoDTO.setSubjectScore( subjectInfoBO.getSubjectScore() );
         subjectInfoDTO.setSubjectParse( subjectInfoBO.getSubjectParse() );
         subjectInfoDTO.setSubjectAnswer( subjectInfoBO.getSubjectAnswer() );
-        List<Long> list = subjectInfoBO.getCategoryIds();
-        if ( list != null ) {
-            subjectInfoDTO.setCategoryIds( new ArrayList<Long>( list ) );
-        }
-        List<Long> list1 = subjectInfoBO.getLabelIds();
-        if ( list1 != null ) {
-            subjectInfoDTO.setLabelIds( new ArrayList<Long>( list1 ) );
-        }
+        subjectInfoDTO.setCategoryIds( longListToIntegerList( subjectInfoBO.getCategoryIds() ) );
+        subjectInfoDTO.setLabelIds( longListToIntegerList( subjectInfoBO.getLabelIds() ) );
         subjectInfoDTO.setOptionList( subjectAnswerBOListToSubjectAnswerDTOList( subjectInfoBO.getOptionList() ) );
+        List<String> list3 = subjectInfoBO.getLabelName();
+        if ( list3 != null ) {
+            subjectInfoDTO.setLabelName( new ArrayList<String>( list3 ) );
+        }
         subjectInfoDTO.setCategoryId( subjectInfoBO.getCategoryId() );
         subjectInfoDTO.setLabelId( subjectInfoBO.getLabelId() );
 
@@ -103,6 +99,19 @@ public class SubjectInfoDTOConverterImpl implements SubjectInfoDTOConverter {
         }
 
         return list;
+    }
+
+    protected List<Long> integerListToLongList(List<Integer> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        List<Long> list1 = new ArrayList<Long>( list.size() );
+        for ( Integer integer : list ) {
+            list1.add( integer.longValue() );
+        }
+
+        return list1;
     }
 
     protected SubjectAnswerBO subjectAnswerDTOToSubjectAnswerBO(SubjectAnswerDTO subjectAnswerDTO) {
@@ -127,6 +136,19 @@ public class SubjectInfoDTOConverterImpl implements SubjectInfoDTOConverter {
         List<SubjectAnswerBO> list1 = new ArrayList<SubjectAnswerBO>( list.size() );
         for ( SubjectAnswerDTO subjectAnswerDTO : list ) {
             list1.add( subjectAnswerDTOToSubjectAnswerBO( subjectAnswerDTO ) );
+        }
+
+        return list1;
+    }
+
+    protected List<Integer> longListToIntegerList(List<Long> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        List<Integer> list1 = new ArrayList<Integer>( list.size() );
+        for ( Long long1 : list ) {
+            list1.add( long1.intValue() );
         }
 
         return list1;

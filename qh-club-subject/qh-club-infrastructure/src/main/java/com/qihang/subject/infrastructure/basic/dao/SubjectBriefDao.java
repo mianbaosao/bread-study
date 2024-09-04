@@ -2,7 +2,7 @@ package com.qihang.subject.infrastructure.basic.dao;
 
 import com.qihang.subject.infrastructure.basic.entity.SubjectBrief;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 
 /**
@@ -25,7 +25,7 @@ public interface SubjectBriefDao {
      * 查询指定行数据
      *
      * @param subjectBrief 查询条件
-     * @param          分页对象
+     * @param
      * @return 对象列表
      */
     SubjectBrief queryAllByLimit(SubjectBrief subjectBrief);

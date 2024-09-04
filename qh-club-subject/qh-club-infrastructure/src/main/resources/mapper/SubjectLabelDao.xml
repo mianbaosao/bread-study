@@ -95,13 +95,12 @@
     </select>
     <select id="batchQueryById" resultMap="SubjectLabelMap">
         select
-        id, label_name, sort_num, category_id, created_by, created_time, update_by, update_time, is_deleted
+        id, label_name, sort_num,category_id, created_by, created_time, update_by, is_deleted, update_time
         from subject_label
         where id in
-            <foreach collection="list" item="id" open="(" separator="," close=")">
-                #{id}
-            </foreach>
-
+        <foreach open="(" close=")" collection="list" item="id" separator=",">
+            #{id}
+        </foreach>
     </select>
 
     <!--新增所有列-->
