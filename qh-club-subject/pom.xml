@@ -8,7 +8,7 @@
     <artifactId>qh-club-subject</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-    <description>启航club-题目领域服务</description>
+    <description>面包study-题目领域服务</description>
     <modelVersion>4.0.0</modelVersion>
 
     <modules>
