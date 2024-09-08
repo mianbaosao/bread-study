@@ -2,24 +2,18 @@ package com.qihang.subject.domain.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.qihang.subject.common.enums.IsDeleteEnum;
-import com.qihang.subject.domain.convert.SubjectCategoryConverter;
 import com.qihang.subject.domain.convert.SubjectLabelConverter;
-import com.qihang.subject.domain.entity.SubjectCategoryBO;
 import com.qihang.subject.domain.entity.SubjectLabelBO;
 import com.qihang.subject.domain.service.SubjectLabelDomainService;
-import com.qihang.subject.infrastructure.basic.entity.SubjectCategory;
 import com.qihang.subject.infrastructure.basic.entity.SubjectLabel;
 import com.qihang.subject.infrastructure.basic.entity.SubjectMapping;
 import com.qihang.subject.infrastructure.basic.service.SubjectLabelService;
 import com.qihang.subject.infrastructure.basic.service.SubjectMappingService;
-import jdk.nashorn.internal.codegen.Label;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import javax.security.auth.Subject;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
