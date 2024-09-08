@@ -1,8 +1,6 @@
 package com.qihang.subject.domain.handler.subject;
 
 import com.qihang.subject.common.enums.SubjectInfoTypeEnum;
-import com.qihang.subject.domain.handler.subject.SubjectTypeHandler;
-import com.sun.javafx.collections.MappingChange;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 

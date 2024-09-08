@@ -2,12 +2,12 @@ package com.qihang.subject.domain.handler.subject;
 
 import com.google.common.base.Preconditions;
 import com.qihang.subject.common.enums.SubjectInfoTypeEnum;
-import com.qihang.subject.domain.convert.JudgeSubejectConverter;
+
 import com.qihang.subject.domain.convert.MultipleSubejectConverter;
 import com.qihang.subject.domain.entity.SubjectAnswerBO;
 import com.qihang.subject.domain.entity.SubjectInfoBO;
 import com.qihang.subject.domain.entity.SubjectOptionBO;
-import com.qihang.subject.infrastructure.basic.entity.SubjectJudge;
+
 import com.qihang.subject.infrastructure.basic.entity.SubjectMultiple;
 import com.qihang.subject.infrastructure.basic.service.SubjectMultipleService;
 import org.springframework.stereotype.Component;

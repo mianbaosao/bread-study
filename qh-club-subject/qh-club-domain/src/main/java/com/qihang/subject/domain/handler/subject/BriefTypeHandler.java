@@ -1,24 +1,20 @@
 package com.qihang.subject.domain.handler.subject;
 
-import com.google.common.base.Preconditions;
+
 import com.qihang.subject.common.enums.IsDeleteEnum;
 import com.qihang.subject.common.enums.SubjectInfoTypeEnum;
 import com.qihang.subject.domain.convert.BriefSubjectConverter;
-import com.qihang.subject.domain.convert.RadioSubjectConverter;
-import com.qihang.subject.domain.convert.SubjectInfoConverter;
+
 import com.qihang.subject.domain.entity.SubjectInfoBO;
 import com.qihang.subject.domain.entity.SubjectOptionBO;
 import com.qihang.subject.infrastructure.basic.entity.SubjectBrief;
-import com.qihang.subject.infrastructure.basic.entity.SubjectInfo;
-import com.qihang.subject.infrastructure.basic.entity.SubjectRadio;
+
 import com.qihang.subject.infrastructure.basic.service.SubjectBriefService;
 import com.qihang.subject.infrastructure.basic.service.SubjectInfoService;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.LinkedList;
-import java.util.List;
+
 
 /**
  * @Description: 简答策略类

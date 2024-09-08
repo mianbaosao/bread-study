@@ -8,11 +8,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="qh-club-domain" />
-        <module name="qh-club-infrastructure" />
+        <module name="qh-club-application-job" />
         <module name="qh-club-application-controller" />
         <module name="qh-club-subject-api" />
-        <module name="qh-club-application-job" />
         <module name="qh-club-commom" />
+        <module name="qh-club-infrastructure" />
         <module name="qh-club-application-mq" />
         <module name="qh-club-starter" />
       </profile>
@@ -27,7 +27,7 @@
       <module name="qh-club-infrastructure" target="1.8" />
       <module name="qh-club-starter" target="8" />
       <module name="qh-club-subject" target="1.5" />
-      <module name="qh-club-subject-api" target="1.5" />
+      <module name="qh-club-subject-api" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
