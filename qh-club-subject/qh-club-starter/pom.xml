@@ -47,7 +47,7 @@
     </dependencies>
 
     <build>
-        <finalName>bread_study</finalName>
+        <finalName>bread_study_start</finalName>
         <!--打包成jar包时的名字-->
         <plugins>
             <plugin>
