@@ -97,7 +97,7 @@ public class MinioUtil {
     }
 
     /**
-     * 获取文件urle
+     * 获取文件url
      */
     public String getPreviewFileUrl(String bucketName, String objectName) throws Exception {
         GetPresignedObjectUrlArgs args = GetPresignedObjectUrlArgs.builder()

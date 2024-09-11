@@ -1,16 +1,21 @@
-package com.bread.oss.entity;
+package com.mianbao.subject.common.entity;
 
+import com.mianbao.subject.common.enums.ResultCodeEnum;
 import lombok.Data;
 
+/**
+ * @Description: 结果封装
+ * @Author:bread
+ * @Date: 2024-07-29 19:47
+ */
 @Data
 public class Result<T> {
-
-    private Boolean success;
+    private boolean success;
     private Integer code;
     private String message;
     private T data;
 
-    public static Result ok(){
+    public static Result success() {
         Result result = new Result();
         result.setSuccess(true);
         result.setCode(ResultCodeEnum.SUCCESS.getCode());
@@ -18,8 +23,8 @@ public class Result<T> {
         return result;
     }
 
-    public static <T> Result<T> ok(T data){
-        Result<T> result = new Result<>();
+    public static <T> Result success(T data) {
+        Result result = new Result();
         result.setSuccess(true);
         result.setCode(ResultCodeEnum.SUCCESS.getCode());
         result.setMessage(ResultCodeEnum.SUCCESS.getDesc());
@@ -27,7 +32,7 @@ public class Result<T> {
         return result;
     }
 
-    public static Result fail(){
+    public static Result fail() {
         Result result = new Result();
         result.setSuccess(false);
         result.setCode(ResultCodeEnum.FAIL.getCode());
@@ -35,8 +40,8 @@ public class Result<T> {
         return result;
     }
 
-    public static <T> Result<T> fail(T data){
-        Result<T> result = new Result<>();
+    public static <T> Result fail(T data) {
+        Result result = new Result();
         result.setSuccess(false);
         result.setCode(ResultCodeEnum.FAIL.getCode());
         result.setMessage(ResultCodeEnum.FAIL.getDesc());

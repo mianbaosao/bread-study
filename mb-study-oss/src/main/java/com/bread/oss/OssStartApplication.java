@@ -13,7 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 
 @SpringBootApplication
-@ComponentScan("com.qihang")
+@ComponentScan("com.bread")
 public class OssStartApplication {
     public static void main(String[] args) {
         SpringApplication.run(OssStartApplication.class);
