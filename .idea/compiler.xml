@@ -7,10 +7,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="mb-study-application-mq" />
+        <module name="mb-study-starter" />
         <module name="mb-study-application-controller" />
         <module name="qh-club-starter" />
-        <module name="mb-study-starter" />
+        <module name="mb-study-application-mq" />
         <module name="qh-club-subject-api" />
         <module name="mb-study-domain" />
         <module name="mb-study-oss" />

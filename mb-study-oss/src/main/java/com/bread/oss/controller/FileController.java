@@ -1,8 +1,11 @@
 package com.bread.oss.controller;
 
+
+
+import com.alibaba.nacos.api.config.annotation.NacosValue;
 import com.bread.oss.adapter.impl.MinioAdapterImpl;
-import com.bread.oss.util.MinioUtil;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,14 +22,22 @@ public class FileController {
     @Resource
     private MinioAdapterImpl minioAdapter;
 
+    @Value("${storage.service.type}")
+    private String storageType;
+
+    @RequestMapping("/testnacos")
+    public String test2()throws Exception{
+
+        String s=storageType;
+        if(s==null||s.equals("")){
+            s="null";
+        }
+        return  s;
+    }
+
     @RequestMapping("/test")
     public String test()throws Exception{
         List<String> allBucket = minioAdapter.getAllBucket();
         return  allBucket.get(0);
-    }
-    @RequestMapping("/test2")
-    public String test2()throws Exception{
-
-        return  "ssssssss";
     }
 }

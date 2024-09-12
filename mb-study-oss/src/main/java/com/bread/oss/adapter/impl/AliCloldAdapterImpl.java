@@ -2,6 +2,7 @@ package com.bread.oss.adapter.impl;
 
 import com.bread.oss.adapter.StorageAdapter;
 import com.bread.oss.entity.FileInfo;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
@@ -13,6 +14,7 @@ import java.util.List;
  * @Author:bread
  * @Date: 2024-09-11 20:04
  */
+@Configuration
 public class AliCloldAdapterImpl implements StorageAdapter {
     @Override
     public void createBucket(String bucket) {
