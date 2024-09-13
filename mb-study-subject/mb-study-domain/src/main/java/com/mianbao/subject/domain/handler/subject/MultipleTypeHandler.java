@@ -3,6 +3,7 @@ package com.mianbao.subject.domain.handler.subject;
 import com.google.common.base.Preconditions;
 
 
+import com.mianbao.subject.common.enums.SubjectInfoTypeEnum;
 import com.mianbao.subject.domain.entity.SubjectAnswerBO;
 import com.mianbao.subject.domain.convert.MultipleSubejectConverter;
 import com.mianbao.subject.domain.entity.SubjectInfoBO;
@@ -10,7 +11,7 @@ import com.mianbao.subject.domain.entity.SubjectOptionBO;
 
 import com.mianbao.subject.infrastructure.basic.entity.SubjectMultiple;
 import com.mianbao.subject.infrastructure.basic.service.SubjectMultipleService;
-import com.qihang.subject.common.enums.SubjectInfoTypeEnum;
+
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 

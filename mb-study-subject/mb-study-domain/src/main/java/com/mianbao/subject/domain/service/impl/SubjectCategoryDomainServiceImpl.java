@@ -2,12 +2,13 @@ package com.mianbao.subject.domain.service.impl;
 
 import com.alibaba.fastjson.JSON;
 
+import com.mianbao.subject.common.enums.IsDeleteEnum;
 import com.mianbao.subject.domain.convert.SubjectCategoryConverter;
 import com.mianbao.subject.domain.entity.SubjectCategoryBO;
 import com.mianbao.subject.domain.service.SubjectCategoryDomainService;
 import com.mianbao.subject.infrastructure.basic.entity.SubjectCategory;
 import com.mianbao.subject.infrastructure.basic.service.SubjectCategoryService;
-import com.qihang.subject.common.enums.IsDeleteEnum;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

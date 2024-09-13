@@ -6,9 +6,10 @@ import com.mianbao.subject.application.dto.SubjectCategoryDTO;
 import com.mianbao.subject.application.dto.SubjectLabelDTO;
 import com.mianbao.subject.application.convert.SubjectLabelDTOConverter;
 
+import com.mianbao.subject.common.entity.Result;
 import com.mianbao.subject.domain.entity.SubjectLabelBO;
 import com.mianbao.subject.domain.service.SubjectLabelDomainService;
-import com.qihang.subject.common.entity.Result;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;

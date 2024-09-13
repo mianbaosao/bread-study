@@ -5,10 +5,11 @@ import com.google.common.base.Preconditions;
 import com.mianbao.subject.application.convert.SubjectCategoryDTOConverter;
 import com.mianbao.subject.application.dto.SubjectCategoryDTO;
 
+import com.mianbao.subject.common.entity.Result;
 import com.mianbao.subject.domain.entity.SubjectCategoryBO;
 import com.mianbao.subject.domain.service.SubjectCategoryDomainService;
 
-import com.qihang.subject.common.entity.Result;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;

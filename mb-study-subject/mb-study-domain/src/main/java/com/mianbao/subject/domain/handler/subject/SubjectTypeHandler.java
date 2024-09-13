@@ -1,9 +1,10 @@
 package com.mianbao.subject.domain.handler.subject;
 
 
+import com.mianbao.subject.common.enums.SubjectInfoTypeEnum;
 import com.mianbao.subject.domain.entity.SubjectInfoBO;
 import com.mianbao.subject.domain.entity.SubjectOptionBO;
-import com.qihang.subject.common.enums.SubjectInfoTypeEnum;
+
 
 
 /**

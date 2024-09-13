@@ -1,7 +1,8 @@
 package com.mianbao.subject.domain.handler.subject;
 
 
-import com.qihang.subject.common.enums.SubjectInfoTypeEnum;
+
+import com.mianbao.subject.common.enums.SubjectInfoTypeEnum;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 

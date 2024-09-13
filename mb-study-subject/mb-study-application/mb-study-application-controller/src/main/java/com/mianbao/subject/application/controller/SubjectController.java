@@ -6,11 +6,12 @@ import com.mianbao.subject.application.convert.SubjectAnswerDTOConverter;
 import com.mianbao.subject.application.convert.SubjectInfoDTOConverter;
 import com.mianbao.subject.application.dto.SubjectInfoDTO;
 
+import com.mianbao.subject.common.entity.PageResult;
+import com.mianbao.subject.common.entity.Result;
 import com.mianbao.subject.domain.entity.SubjectAnswerBO;
 import com.mianbao.subject.domain.entity.SubjectInfoBO;
 import com.mianbao.subject.domain.service.SubjectInfoDomainService;
-import com.qihang.subject.common.entity.PageResult;
-import com.qihang.subject.common.entity.Result;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;

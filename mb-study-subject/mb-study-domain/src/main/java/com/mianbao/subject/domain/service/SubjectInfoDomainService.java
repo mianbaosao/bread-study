@@ -1,8 +1,9 @@
 package com.mianbao.subject.domain.service;
 
 
+import com.mianbao.subject.common.entity.PageResult;
 import com.mianbao.subject.domain.entity.SubjectInfoBO;
-import com.qihang.subject.common.entity.PageResult;
+
 
 /**
  * @Description: 题目信息

@@ -1,7 +1,8 @@
 package com.mianbao.subject.application.dto;
 
 
-import com.qihang.subject.common.entity.PageInfo;
+
+import com.mianbao.subject.common.entity.PageInfo;
 import lombok.Data;
 
 import java.io.Serializable;
