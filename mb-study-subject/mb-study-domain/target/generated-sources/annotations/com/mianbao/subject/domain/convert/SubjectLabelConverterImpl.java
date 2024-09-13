@@ -8,7 +8,7 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-09-11T21:22:58+0800",
+    date = "2024-09-13T11:12:48+0800",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_291 (Oracle Corporation)"
 )
 public class SubjectLabelConverterImpl implements SubjectLabelConverter {
@@ -24,21 +24,19 @@ public class SubjectLabelConverterImpl implements SubjectLabelConverter {
         subjectLabel.setId( subjectLabelBO.getId() );
         subjectLabel.setLabelName( subjectLabelBO.getLabelName() );
         subjectLabel.setSortNum( subjectLabelBO.getSortNum() );
-        if ( subjectLabelBO.getCategoryId() != null ) {
-            subjectLabel.setCategoryId( String.valueOf( subjectLabelBO.getCategoryId() ) );
-        }
+        subjectLabel.setCategoryId( subjectLabelBO.getCategoryId() );
 
         return subjectLabel;
     }
 
     @Override
-    public List<SubjectLabelBO> convertBoToLLabel(List<SubjectLabel> LabelList) {
-        if ( LabelList == null ) {
+    public List<SubjectLabelBO> convertLabelToBoList(List<SubjectLabel> labelList) {
+        if ( labelList == null ) {
             return null;
         }
 
-        List<SubjectLabelBO> list = new ArrayList<SubjectLabelBO>( LabelList.size() );
-        for ( SubjectLabel subjectLabel : LabelList ) {
+        List<SubjectLabelBO> list = new ArrayList<SubjectLabelBO>( labelList.size() );
+        for ( SubjectLabel subjectLabel : labelList ) {
             list.add( subjectLabelToSubjectLabelBO( subjectLabel ) );
         }
 
@@ -55,9 +53,7 @@ public class SubjectLabelConverterImpl implements SubjectLabelConverter {
         subjectLabelBO.setId( subjectLabel.getId() );
         subjectLabelBO.setLabelName( subjectLabel.getLabelName() );
         subjectLabelBO.setSortNum( subjectLabel.getSortNum() );
-        if ( subjectLabel.getCategoryId() != null ) {
-            subjectLabelBO.setCategoryId( Long.parseLong( subjectLabel.getCategoryId() ) );
-        }
+        subjectLabelBO.setCategoryId( subjectLabel.getCategoryId() );
 
         return subjectLabelBO;
     }
