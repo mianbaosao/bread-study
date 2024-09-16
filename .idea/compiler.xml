@@ -15,6 +15,7 @@
         <module name="mb-study-auth-common" />
         <module name="mb-study-domain" />
         <module name="mb-study-starter" />
+        <module name="mb-study-gateway" />
         <module name="mb-study-application-job" />
         <module name="mb-study-oss" />
         <module name="qh-club-domain" />
@@ -50,6 +51,7 @@
       <module name="mb-study-auth-starter-api" target="1.8" />
       <module name="mb-study-commom" target="1.8" />
       <module name="mb-study-domain" target="8" />
+      <module name="mb-study-gateway" target="8" />
       <module name="mb-study-infrastructure" target="1.8" />
       <module name="mb-study-oss" target="8" />
       <module name="mb-study-starter" target="8" />

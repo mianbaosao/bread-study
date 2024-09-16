@@ -1,0 +1,26 @@
+server:
+  port: 5000
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: oss
+          uri: lb://mb-study-oss  # 使用 uri 而不是 url
+          predicates:
+            - Path=/oss/**  # Path 大小写敏感
+          filters:
+            - StripPrefix=1  # StripPrefix 过滤器，用于删除路径前缀
+
+        - id: auth
+          uri: lb://mb-study-auth
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1
+
+        - id: subject
+          uri: lb://mb-study-subject
+          predicates:
+            - Path=/subject/**
+          filters:
+            - StripPrefix=1

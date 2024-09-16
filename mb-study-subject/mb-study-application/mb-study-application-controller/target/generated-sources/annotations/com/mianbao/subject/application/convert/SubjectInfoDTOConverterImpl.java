@@ -10,7 +10,7 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-09-13T11:12:50+0800",
+    date = "2024-09-16T15:32:56+0800",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_291 (Oracle Corporation)"
 )
 public class SubjectInfoDTOConverterImpl implements SubjectInfoDTOConverter {

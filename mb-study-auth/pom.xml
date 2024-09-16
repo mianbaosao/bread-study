@@ -18,6 +18,8 @@
         <module>mb-study-auth-starter-api</module>
     </modules>
 
+
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
