@@ -4,6 +4,8 @@ import cn.dev33.satoken.context.SaHolder;
 import cn.dev33.satoken.reactor.filter.SaReactorFilter;
 import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpUtil;
+import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.servlet.WebMvcRegistrations;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
  * @date: 2024/09/17
  */
 @Configuration
-public class SaTokenConfigure {
+public class SaTokenConfigure  {
 
     @Bean
     public SaReactorFilter getSaReactorFilter() {
@@ -29,9 +31,10 @@ public class SaTokenConfigure {
                     SaRouter.match("/oss/**", r -> StpUtil.checkLogin());
                     SaRouter.match("/subject/subject/add", r -> StpUtil.checkPermission("subject:add"));
                     SaRouter.match("/subject/**", r -> StpUtil.checkLogin());
-                    //SaRouter.match("/auth/**", "/auth/user/doLogin", r -> StpUtil.checkLogin());
+                    SaRouter.match("/auth/**", "/auth/user/doLogin", r -> StpUtil.checkLogin());
                     //SaRouter.match("/**","/auth/user/doLogin",r -> StpUtil.checkLogin());
                 })
                 ;
     }
+
 }

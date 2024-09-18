@@ -26,9 +26,15 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <version>2.4.2</version>
         </dependency>
+        <!-- sa-token 依赖-->
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-spring-boot-starter</artifactId>
+            <version>1.37.0</version>
+        </dependency>
         <dependency>
             <groupId>com.mianbao</groupId>
-            <artifactId>mb-study-auth-infrastructure</artifactId>
+            <artifactId>mb-study-auth-api</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -36,13 +42,6 @@
             <artifactId>mb-study-auth-domain</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <!-- Sa-Token 权限认证，在线文档：https://sa-token.cc -->
-        <dependency>
-            <groupId>cn.dev33</groupId>
-            <artifactId>sa-token-spring-boot-starter</artifactId>
-            <version>1.39.0</version>
-        </dependency>
-
     </dependencies>
 
 </project>

@@ -21,9 +21,6 @@ import reactor.core.publisher.Mono;
 
 /**
  * 登录拦截器
- *
- * @author: bread
- * @date: 2024/09/17
  */
 @Component
 @Slf4j
