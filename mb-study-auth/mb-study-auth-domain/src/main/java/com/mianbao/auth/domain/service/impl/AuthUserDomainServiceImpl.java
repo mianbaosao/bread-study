@@ -2,6 +2,9 @@ package com.mianbao.auth.domain.service.impl;
 
 
 import cn.dev33.satoken.secure.SaSecureUtil;
+import cn.dev33.satoken.stp.SaTokenInfo;
+import cn.dev33.satoken.stp.StpUtil;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.google.gson.Gson;
 import com.mianbao.auth.common.enums.AuthUserStatusEnum;
 import com.mianbao.auth.common.enums.IsDeletedFlagEnum;
@@ -14,7 +17,7 @@ import com.mianbao.auth.infra.basic.entity.*;
 import com.mianbao.auth.infra.basic.service.*;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -43,7 +46,7 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
     @Resource
     private AuthRoleService authRoleService;
 
-    private String salt = "chicken";
+    private String salt = "bread";
 
     @Resource
     private RedisUtil redisUtil;
@@ -74,7 +77,7 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
             authUser.setAvatar("http://117.72.37.31:9000/user/icon/微信图片_20231203153718(1).png");
         }
         if (StringUtils.isBlank(authUser.getNickName())) {
-            authUser.setNickName("鸡翅粉丝");
+            authUser.setNickName("mianbao");
         }
         authUser.setStatus(AuthUserStatusEnum.OPEN.getCode());
         authUser.setIsDeleted(IsDeletedFlagEnum.UN_DELETED.getCode());
@@ -110,5 +113,49 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
         redisUtil.set(permissionKey, new Gson().toJson(permissionList));
 
         return count > 0;
+    }
+
+
+    @Override
+    public Boolean update(AuthUserBO authUserBO) {
+        AuthUser authUser = AuthUserBOConverter.INSTANCE.convertBOToEntity(authUserBO);
+        Integer count = authUserService.updateByUserName(authUser);
+        return count > 0;
+    }
+
+    @Override
+    public SaTokenInfo doLogin(String validCode) {
+        String loginKey = redisUtil.buildKey(LOGIN_PREFIX, validCode);
+        String openId = redisUtil.get(loginKey);
+        if (StringUtils.isBlank(openId)) {
+            return null;
+        }
+        AuthUserBO authUserBO = new AuthUserBO();
+        authUserBO.setUserName(openId);
+        this.register(authUserBO);
+        StpUtil.login(openId);
+        SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
+        return tokenInfo;
+    }
+
+    @Override
+    public AuthUserBO getUserInfo(AuthUserBO authUserBO) {
+        AuthUser authUser = new AuthUser();
+        authUser.setUserName(authUserBO.getUserName());
+        List<AuthUser> userList = authUserService.queryByCondition(authUser);
+        if (CollectionUtils.isEmpty(userList)) {
+            return new AuthUserBO();
+        }
+        AuthUser user = userList.get(0);
+        return AuthUserBOConverter.INSTANCE.convertEntityToBO(user);
+    }
+
+    @Override
+    public List<AuthUserBO> listUserInfoByIds(List<String> userNameList) {
+        List<AuthUser> userList = authUserService.listUserInfoByIds(userNameList);
+        if (CollectionUtils.isEmpty(userList)) {
+            return Collections.emptyList();
+        }
+        return AuthUserBOConverter.INSTANCE.convertEntityToBO(userList);
     }
 }

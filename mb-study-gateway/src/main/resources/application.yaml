@@ -51,4 +51,4 @@ sa-token:
   token-style: random-32
   # 是否输出操作日志
   is-log: true
-  #token-prefix: mianbao
+  token-prefix: mianbao

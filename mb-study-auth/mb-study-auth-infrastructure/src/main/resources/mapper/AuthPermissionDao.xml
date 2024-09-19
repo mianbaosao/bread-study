@@ -19,10 +19,9 @@
         <result property="isDeleted" column="is_deleted" jdbcType="INTEGER"/>
     </resultMap>
 
-    <!--查询单个-->
     <select id="queryById" resultMap="AuthPermissionMap">
         select
-            id, name, parent_id, type, menu_url, status, show, icon, permission_key, created_by, created_time, update_by, update_time, is_deleted
+            id, name, parent_id, type, menu_url, status, `show`, icon, permission_key, created_by, created_time, update_by, update_time, is_deleted
         from auth_permission
         where id = #{id}
     </select>
@@ -128,8 +127,9 @@
         </where>
     </select>
     <select id="queryByRoleList" resultMap="AuthPermissionMap">
-        select * from auth_permission
-        where id in
+        SELECT *
+        FROM auth_permission
+        WHERE id IN
         <foreach open="(" close=")" collection="list" item="id" separator=",">
             #{id}
         </foreach>
@@ -222,5 +222,6 @@
     <delete id="deleteById">
         delete from auth_permission where id = #{id}
     </delete>
+
 </mapper>
 

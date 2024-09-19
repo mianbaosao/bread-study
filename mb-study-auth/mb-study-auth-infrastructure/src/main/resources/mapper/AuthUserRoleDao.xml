@@ -24,7 +24,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="AuthUserRoleMap">
         select
-          id, user_id, role_id, created_by, created_time, update_by, update_time, is_deleted
+        id, user_id, role_id, created_by, created_time, update_by, update_time, is_deleted
         from auth_user_role
         <where>
             <if test="id != null">
@@ -52,7 +52,6 @@
                 and is_deleted = #{isDeleted}
             </if>
         </where>
-        limit #{pageable.offset}, #{pageable.pageSize}
     </select>
 
     <!--统计总行数-->
@@ -88,27 +87,26 @@
     </select>
 
     <!--新增所有列-->
-    <insert id="insert" keyProperty="" useGeneratedKeys="true">
-        insert into auth_user_role(id, user_id, role_id, created_by, created_time, update_by, update_time, is_deleted)
-        values (#{id}, #{userId}, #{roleId}, #{createdBy}, #{createdTime}, #{updateBy}, #{updateTime}, #{isDeleted})
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into auth_user_role(user_id, role_id, created_by, created_time, update_by, update_time, is_deleted)
+        values (#{userId}, #{roleId}, #{createdBy}, #{createdTime}, #{updateBy}, #{updateTime}, #{isDeleted})
     </insert>
 
-    <insert id="insertBatch" keyProperty="" useGeneratedKeys="true">
-        insert into auth_user_role(id, user_id, role_id, created_by, created_time, update_by, update_time, is_deleted)
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into auth_user_role(user_id, role_id, created_by, created_time, update_by, update_time, is_deleted)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.id}, #{entity.userId}, #{entity.roleId}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
+            (#{entity.userId}, #{entity.roleId}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
         </foreach>
     </insert>
 
-    <insert id="insertOrUpdateBatch" keyProperty="" useGeneratedKeys="true">
-        insert into auth_user_role(id, user_id, role_id, created_by, created_time, update_by, update_time, is_deleted)
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into auth_user_role(user_id, role_id, created_by, created_time, update_by, update_time, is_deleted)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.id}, #{entity.userId}, #{entity.roleId}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
+            (#{entity.userId}, #{entity.roleId}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
         </foreach>
         on duplicate key update
-        id = values(id),
         user_id = values(user_id),
         role_id = values(role_id),
         created_by = values(created_by),
@@ -122,9 +120,6 @@
     <update id="update">
         update auth_user_role
         <set>
-            <if test="id != null">
-                id = #{id},
-            </if>
             <if test="userId != null">
                 user_id = #{userId},
             </if>
@@ -147,14 +142,12 @@
                 is_deleted = #{isDeleted},
             </if>
         </set>
-        where  = #{}
+        where id = #{id}
     </update>
 
     <!--通过主键删除-->
     <delete id="deleteById">
         delete from auth_user_role where id = #{id}
     </delete>
-
-
 </mapper>
 

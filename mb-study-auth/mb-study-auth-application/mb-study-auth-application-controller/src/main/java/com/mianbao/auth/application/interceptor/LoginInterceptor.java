@@ -1,8 +1,9 @@
 package com.mianbao.auth.application.interceptor;
 
 
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.mianbao.auth.context.LoginContextHolder;
-import org.apache.commons.lang3.StringUtils;
+
 import org.springframework.lang.Nullable;
 import org.springframework.web.servlet.HandlerInterceptor;
 
