@@ -7,30 +7,31 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="mb-study-auth-infrastructure" />
+        <module name="mb-study-application-mq" />
         <module name="mb-study-application-controller" />
         <module name="mb-study-commom" />
-        <module name="mb-study-application-mq" />
+        <module name="qh-club-starter" />
+        <module name="mb-study-auth-api" />
         <module name="qh-club-subject-api" />
         <module name="mb-study-auth-common" />
-        <module name="mb-study-auth-api" />
+        <module name="mb-study-weChat" />
         <module name="mb-study-domain" />
+        <module name="mb-study-auth-starter" />
         <module name="mb-study-starter" />
         <module name="mb-study-gateway" />
-        <module name="mb-study-application-job" />
         <module name="mb-study-oss" />
         <module name="qh-club-domain" />
+        <module name="mb-study-auth-infrastructure" />
         <module name="mb-study-auth-application-job" />
-        <module name="mb-study-infrastructure" />
         <module name="mb-study-auth-application-mq" />
         <module name="qh-club-commom" />
         <module name="mb-study-auth-application-controller" />
         <module name="mb-study-auth-starter-api" />
-        <module name="qh-club-starter" />
+        <module name="mb-study-infrastructure" />
         <module name="mb-study-subject-api" />
         <module name="qh-club-infrastructure" />
         <module name="mb-study-auth-domain" />
-        <module name="mb-study-auth-starter" />
+        <module name="mb-study-application-job" />
         <module name="mb-study-auth-application-jobs" />
       </profile>
     </annotationProcessing>
@@ -58,6 +59,7 @@
       <module name="mb-study-starter" target="8" />
       <module name="mb-study-subject" target="1.5" />
       <module name="mb-study-subject-api" target="1.8" />
+      <module name="mb-study-weChat" target="8" />
       <module name="qh-club-application" target="8" />
       <module name="qh-club-commom" target="1.8" />
       <module name="qh-club-domain" target="8" />

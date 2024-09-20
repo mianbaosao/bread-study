@@ -16,11 +16,14 @@ public class AuthRolePermissionDTO implements Serializable {
     private static final long serialVersionUID = 459343371709166261L;
     
     private Long id;
-    
+
+    //角色id
     private Long roleId;
-    
+
+    //权限id
     private Long permissionId;
 
+    //权限id列表
     private List<Long> permissionIdList;
 }
 
