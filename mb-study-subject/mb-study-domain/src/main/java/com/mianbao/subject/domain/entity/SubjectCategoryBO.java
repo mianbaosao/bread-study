@@ -2,6 +2,8 @@ package com.mianbao.subject.domain.entity;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @Description: 分类实体类
  * @Author:bread
@@ -41,6 +43,10 @@ public class SubjectCategoryBO {
      */
     private Integer count;
 
+    /**
+     * 标签bo数量
+     */
+    private List<SubjectLabelBO> labelBOList;
 
 
 

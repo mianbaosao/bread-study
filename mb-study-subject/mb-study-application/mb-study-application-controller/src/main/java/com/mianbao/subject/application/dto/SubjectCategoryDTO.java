@@ -3,6 +3,7 @@ package com.mianbao.subject.application.dto;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @Description: dto
@@ -18,5 +19,8 @@ public class SubjectCategoryDTO implements Serializable {
     private String imageUrl;
     private Long parentId;
 
-
+    /**
+     * 标签信息
+     */
+    private List<SubjectLabelDTO> labelDTOList;
 }
