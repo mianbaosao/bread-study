@@ -26,6 +26,9 @@ import reactor.core.publisher.Mono;
 @Slf4j
 public class LoginFilter implements GlobalFilter {
 
+    //filter：这是过滤器的核心方法。它接收两个参数：
+    //ServerWebExchange exchange：封装了 HTTP 请求和响应的对象，代表当前正在处理的请求。
+    //GatewayFilterChain chain：过滤链，表示多个过滤器可以依次处理请求，chain.filter(exchange) 会将请求传递给下一个过滤器。
     @Override
     @SneakyThrows
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -40,7 +43,11 @@ public class LoginFilter implements GlobalFilter {
         SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
         log.info("LoginFilter.filter.url:{}", new Gson().toJson(tokenInfo));
         String loginId = (String) tokenInfo.getLoginId();
+        //将提取到的 loginId 添加到请求头中，使用 mutate.header("loginId", loginId) 来修改请求头，
+        // 以便下游服务可以获取到当前登录用户的信息。
         mutate.header("loginId", loginId);
+        //通过 exchange.mutate().request(mutate.build()).build() 构建一个新的 ServerWebExchange，它包含了
+        // 修改后的请求（带有 loginId 的请求头），然后通过 chain.filter 将这个修改后的请求传递给下一个过滤器
         return chain.filter(exchange.mutate().request(mutate.build()).build());
     }
 
