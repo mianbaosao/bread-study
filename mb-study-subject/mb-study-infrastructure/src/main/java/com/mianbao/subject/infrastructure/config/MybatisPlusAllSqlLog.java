@@ -1,4 +1,4 @@
-package com.mianbao.subject.infrastructure.basic.config;
+package com.mianbao.subject.infrastructure.config;
 
 import com.baomidou.mybatisplus.extension.plugins.inner.InnerInterceptor;
 import org.apache.ibatis.executor.Executor;

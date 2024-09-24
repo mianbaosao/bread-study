@@ -1,4 +1,4 @@
-package com.mianbao.subject.infrastructure.basic.config;
+package com.mianbao.subject.infrastructure.config;
 
 import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;

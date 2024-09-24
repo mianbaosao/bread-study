@@ -1,4 +1,4 @@
-/*
+package com.mianbao.subject.infrastructure.config;/*
 package com.qihang.subject.infrastructure.basic.config;
 
 import com.jingdianjichi.subject.common.util.LoginUtil;
