@@ -4,15 +4,20 @@ import com.alibaba.fastjson.JSON;
 
 import com.mianbao.subject.common.entity.PageResult;
 import com.mianbao.subject.common.enums.IsDeleteEnum;
+import com.mianbao.subject.common.util.IdWorkerUtil;
+import com.mianbao.subject.common.util.LoginUtil;
 import com.mianbao.subject.domain.handler.subject.SubjectTypeHandler;
 import com.mianbao.subject.domain.convert.SubjectInfoConverter;
 import com.mianbao.subject.domain.entity.SubjectInfoBO;
 import com.mianbao.subject.domain.entity.SubjectOptionBO;
 import com.mianbao.subject.domain.handler.subject.SubjectHandlerTypeFactory;
+import com.mianbao.subject.domain.redis.RedisUtil;
 import com.mianbao.subject.domain.service.SubjectInfoDomainService;
 import com.mianbao.subject.infrastructure.basic.entity.SubjectInfo;
+import com.mianbao.subject.infrastructure.basic.entity.SubjectInfoEs;
 import com.mianbao.subject.infrastructure.basic.entity.SubjectLabel;
 import com.mianbao.subject.infrastructure.basic.entity.SubjectMapping;
+import com.mianbao.subject.infrastructure.basic.service.SubjectEsService;
 import com.mianbao.subject.infrastructure.basic.service.SubjectInfoService;
 import com.mianbao.subject.infrastructure.basic.service.SubjectLabelService;
 import com.mianbao.subject.infrastructure.basic.service.SubjectMappingService;
@@ -22,6 +27,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,12 +44,17 @@ public class SubjectInfoDomainServiceImpl implements SubjectInfoDomainService {
     private SubjectInfoService subjectInfoService;
 
     @Resource
+    private SubjectEsService subjectEsService;
+    @Resource
     private SubjectLabelService subjectLabelService;
     @Resource
     private SubjectMappingService subjectMappingService;
     @Resource
     private SubjectHandlerTypeFactory subjectHandlerTypeFactory;
 
+    private static final String RANK_KEY = "subject_rank";
+    @Resource
+    private RedisUtil redisUtil;
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void add(SubjectInfoBO subjectInfoBO) {
@@ -71,6 +82,18 @@ public class SubjectInfoDomainServiceImpl implements SubjectInfoDomainService {
             });
         });
         subjectMappingService.batchInsert(subjectMappingList);
+        //同步到es
+        SubjectInfoEs subjectInfoEs = new SubjectInfoEs();
+        subjectInfoEs.setDocId(new IdWorkerUtil(1, 1, 1).nextId());
+        subjectInfoEs.setSubjectId(subjectInfo.getId());
+        subjectInfoEs.setSubjectAnswer(subjectInfoBO.getSubjectAnswer());
+        subjectInfoEs.setCreateTime(new Date().getTime());
+        subjectInfoEs.setCreateUser("面包");
+        subjectInfoEs.setSubjectName(subjectInfo.getSubjectName());
+        subjectInfoEs.setSubjectType(subjectInfo.getSubjectType());
+        subjectEsService.insert(subjectInfoEs);
+        //redis放入zadd计入排行榜
+        //redisUtil.addScore(RANK_KEY, LoginUtil.getLoginId(), 1);
     }
 
     @Override
