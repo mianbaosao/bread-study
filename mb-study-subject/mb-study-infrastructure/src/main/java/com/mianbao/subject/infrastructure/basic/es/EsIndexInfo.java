@@ -15,6 +15,7 @@ public class EsIndexInfo implements Serializable {
     /**
      * 索引名称
      */
+    //
     private String indexName;
 
 }
