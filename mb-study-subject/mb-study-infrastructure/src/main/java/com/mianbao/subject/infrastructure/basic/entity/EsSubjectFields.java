@@ -4,7 +4,7 @@ public class EsSubjectFields {
 
     public static final String DOC_ID = "doc_id";
 
-    public static final String SUBJECT_ID = "subject_id";
+    public static final String SUBJECT_ID = "subjectId";
 
     public static final String SUBJECT_NAME = "subject_name";
 

@@ -10,7 +10,7 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-09-29T18:29:23+0800",
+    date = "2024-10-03T10:49:59+0800",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_291 (Oracle Corporation)"
 )
 public class SubjectInfoDTOConverterImpl implements SubjectInfoDTOConverter {
@@ -37,6 +37,8 @@ public class SubjectInfoDTOConverterImpl implements SubjectInfoDTOConverter {
 
         SubjectInfoBO subjectInfoBO = new SubjectInfoBO();
 
+        subjectInfoBO.setPageNo( subjectInfoDTO.getPageNo() );
+        subjectInfoBO.setPageSize( subjectInfoDTO.getPageSize() );
         subjectInfoBO.setId( subjectInfoDTO.getId() );
         subjectInfoBO.setSubjectName( subjectInfoDTO.getSubjectName() );
         subjectInfoBO.setSubjectDifficult( subjectInfoDTO.getSubjectDifficult() );
@@ -54,6 +56,14 @@ public class SubjectInfoDTOConverterImpl implements SubjectInfoDTOConverter {
         subjectInfoBO.setOptionList( subjectAnswerDTOListToSubjectAnswerBOList( subjectInfoDTO.getOptionList() ) );
         subjectInfoBO.setCategoryId( subjectInfoDTO.getCategoryId() );
         subjectInfoBO.setLabelId( subjectInfoDTO.getLabelId() );
+        subjectInfoBO.setKeyWord( subjectInfoDTO.getKeyWord() );
+        subjectInfoBO.setCreateUser( subjectInfoDTO.getCreateUser() );
+        subjectInfoBO.setCreateUserAvatar( subjectInfoDTO.getCreateUserAvatar() );
+        subjectInfoBO.setSubjectCount( subjectInfoDTO.getSubjectCount() );
+        subjectInfoBO.setLiked( subjectInfoDTO.getLiked() );
+        subjectInfoBO.setLikedCount( subjectInfoDTO.getLikedCount() );
+        subjectInfoBO.setNextSubjectId( subjectInfoDTO.getNextSubjectId() );
+        subjectInfoBO.setLastSubjectId( subjectInfoDTO.getLastSubjectId() );
 
         return subjectInfoBO;
     }
@@ -66,6 +76,8 @@ public class SubjectInfoDTOConverterImpl implements SubjectInfoDTOConverter {
 
         SubjectInfoDTO subjectInfoDTO = new SubjectInfoDTO();
 
+        subjectInfoDTO.setPageNo( subjectInfoBO.getPageNo() );
+        subjectInfoDTO.setPageSize( subjectInfoBO.getPageSize() );
         subjectInfoDTO.setId( subjectInfoBO.getId() );
         subjectInfoDTO.setSubjectName( subjectInfoBO.getSubjectName() );
         subjectInfoDTO.setSubjectDifficult( subjectInfoBO.getSubjectDifficult() );
@@ -83,6 +95,14 @@ public class SubjectInfoDTOConverterImpl implements SubjectInfoDTOConverter {
         }
         subjectInfoDTO.setCategoryId( subjectInfoBO.getCategoryId() );
         subjectInfoDTO.setLabelId( subjectInfoBO.getLabelId() );
+        subjectInfoDTO.setKeyWord( subjectInfoBO.getKeyWord() );
+        subjectInfoDTO.setCreateUser( subjectInfoBO.getCreateUser() );
+        subjectInfoDTO.setCreateUserAvatar( subjectInfoBO.getCreateUserAvatar() );
+        subjectInfoDTO.setSubjectCount( subjectInfoBO.getSubjectCount() );
+        subjectInfoDTO.setLiked( subjectInfoBO.getLiked() );
+        subjectInfoDTO.setLikedCount( subjectInfoBO.getLikedCount() );
+        subjectInfoDTO.setNextSubjectId( subjectInfoBO.getNextSubjectId() );
+        subjectInfoDTO.setLastSubjectId( subjectInfoBO.getLastSubjectId() );
 
         return subjectInfoDTO;
     }

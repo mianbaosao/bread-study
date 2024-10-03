@@ -12,6 +12,7 @@ import com.mianbao.subject.domain.entity.SubjectAnswerBO;
 import com.mianbao.subject.domain.entity.SubjectInfoBO;
 import com.mianbao.subject.domain.service.SubjectInfoDomainService;
 
+import com.mianbao.subject.infrastructure.basic.entity.SubjectInfoEs;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
@@ -38,15 +39,17 @@ public class SubjectController {
     /**
      * 新增题目
      */
+    /**
+     * 新增题目
+     */
     @PostMapping("/add")
     public Result<Boolean> add(@RequestBody SubjectInfoDTO subjectInfoDTO) {
         try {
             if (log.isInfoEnabled()) {
                 log.info("SubjectController.add.dto:{}", JSON.toJSONString(subjectInfoDTO));
             }
-            // StringUtils.isBlank来检查字符串是否为空白，StringUtils.isBlank 会返回 true 如果字符串为 null
             Preconditions.checkArgument(!StringUtils.isBlank(subjectInfoDTO.getSubjectName()),
-            "题目名称不能为空");
+                    "题目名称不能为空");
             Preconditions.checkNotNull(subjectInfoDTO.getSubjectDifficult(), "题目难度不能为空");
             Preconditions.checkNotNull(subjectInfoDTO.getSubjectType(), "题目类型不能为空");
             Preconditions.checkNotNull(subjectInfoDTO.getSubjectScore(), "题目分数不能为空");
@@ -55,19 +58,17 @@ public class SubjectController {
             Preconditions.checkArgument(!CollectionUtils.isEmpty(subjectInfoDTO.getLabelIds())
                     , "标签id不能为空");
 
-            SubjectInfoBO subjectInfoBO= SubjectInfoDTOConverter.INSTANCE.convertDtoToInfoBO(subjectInfoDTO);
-            List<SubjectAnswerBO> subjectAnswerBOS= SubjectAnswerDTOConverter.
-                    INSTANCE.convertDTOToBOList(subjectInfoDTO.getOptionList());
+            SubjectInfoBO subjectInfoBO = SubjectInfoDTOConverter.INSTANCE.convertDtoToInfoBO(subjectInfoDTO);
+            List<SubjectAnswerBO> subjectAnswerBOS =
+                    SubjectAnswerDTOConverter.INSTANCE.convertDTOToBOList(subjectInfoDTO.getOptionList());
             subjectInfoBO.setOptionList(subjectAnswerBOS);
-           subjectInfoDomainService.add(subjectInfoBO);
+            subjectInfoDomainService.add(subjectInfoBO);
             return Result.success(true);
         } catch (Exception e) {
             log.error("SubjectCategoryController.add.error:{}", e.getMessage(), e);
-            return Result.fail("新增标签失败");
-
+            return Result.fail("新增题目失败");
         }
     }
-
 
     /**
      * 查询题目列表
@@ -108,5 +109,26 @@ public class SubjectController {
             return Result.fail("查询题目详情失败");
         }
     }
+    /**
+     * 全文检索
+     */
+    @PostMapping("/getSubjectPageBySearch")
+    public Result<PageResult<SubjectInfoEs>> getSubjectPageBySearch(@RequestBody SubjectInfoDTO subjectInfoDTO) {
+        try {
+            if (log.isInfoEnabled()) {
+                log.info("SubjectController.getSubjectPageBySearch.dto:{}", JSON.toJSONString(subjectInfoDTO));
+            }
+            Preconditions.checkArgument(StringUtils.isNotBlank(subjectInfoDTO.getKeyWord()), "关键词不能为空");
+            SubjectInfoBO subjectInfoBO = SubjectInfoDTOConverter.INSTANCE.convertDtoToInfoBO(subjectInfoDTO);
+            subjectInfoBO.setPageNo(subjectInfoDTO.getPageNo());
+            subjectInfoBO.setPageSize(subjectInfoDTO.getPageSize());
+            PageResult<SubjectInfoEs> boPageResult = subjectInfoDomainService.getSubjectPageBySearch(subjectInfoBO);
+            return Result.success(boPageResult);
+        } catch (Exception e) {
+            log.error("SubjectCategoryController.getSubjectPageBySearch.error:{}", e.getMessage(), e);
+            return Result.fail("全文检索失败");
+        }
+    }
+
 
 }

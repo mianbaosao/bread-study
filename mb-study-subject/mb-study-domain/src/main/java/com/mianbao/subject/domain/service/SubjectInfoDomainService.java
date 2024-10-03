@@ -3,6 +3,7 @@ package com.mianbao.subject.domain.service;
 
 import com.mianbao.subject.common.entity.PageResult;
 import com.mianbao.subject.domain.entity.SubjectInfoBO;
+import com.mianbao.subject.infrastructure.basic.entity.SubjectInfoEs;
 
 
 /**
@@ -31,4 +32,9 @@ public interface SubjectInfoDomainService {
      * @return
      */
     SubjectInfoBO querySubjectInfo(SubjectInfoBO subjectInfoBO);
+
+    /**
+     * 全文检索
+     */
+    PageResult<SubjectInfoEs> getSubjectPageBySearch(SubjectInfoBO subjectInfoBO);
 }

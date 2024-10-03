@@ -1,10 +1,13 @@
 package com.mianbao.subject.common.entity;
 
+import lombok.Data;
+
 /**
  * @Description: 分页请求
  * @Author:bread
  * @Date: 2024-09-02 19:55
  */
+@Data
 public class PageInfo {
 
     private Integer pageNo=1;
