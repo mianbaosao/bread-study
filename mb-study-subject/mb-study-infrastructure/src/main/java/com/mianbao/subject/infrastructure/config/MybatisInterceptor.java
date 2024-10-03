@@ -1,7 +1,7 @@
-package com.mianbao.subject.infrastructure.config;/*
-package com.qihang.subject.infrastructure.basic.config;
+package com.mianbao.subject.infrastructure.config;
 
-import com.jingdianjichi.subject.common.util.LoginUtil;
+
+import com.mianbao.subject.common.util.LoginUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.executor.Executor;
@@ -13,14 +13,12 @@ import org.springframework.stereotype.Component;
 import java.lang.reflect.Field;
 import java.util.*;
 
-*/
 /**
  * 填充createBy,createTime等公共字段的拦截器
  *
- * @author: Bread
+ * @author: bread
  * @date: 2024/1/5
- *//*
-
+ */
 @Component
 @Slf4j
 @Intercepts({@Signature(type = Executor.class, method = "update", args = {
@@ -144,4 +142,3 @@ public class MybatisInterceptor implements Interceptor {
     }
 
 }
-*/
