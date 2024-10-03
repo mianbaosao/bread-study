@@ -127,35 +127,46 @@ public class SubjectEsServiceImpl implements SubjectEsService {
 
     private EsSearchRequest createSearchListQuery(SubjectInfoEs req) {
         EsSearchRequest esSearchRequest = new EsSearchRequest();
+
+        // 创建布尔查询构建器
         BoolQueryBuilder bq = new BoolQueryBuilder();
+
+        // 匹配 subjectName 字段
         MatchQueryBuilder subjectNameQueryBuilder =
                 QueryBuilders.matchQuery(EsSubjectFields.SUBJECT_NAME, req.getKeyWord());
-
         bq.should(subjectNameQueryBuilder);
-        subjectNameQueryBuilder.boost(2);
+        subjectNameQueryBuilder.boost(2); // 提高 subjectName 字段的权重
 
+        // 匹配 subjectAnswer 字段
         MatchQueryBuilder subjectAnswerQueryBuilder =
                 QueryBuilders.matchQuery(EsSubjectFields.SUBJECT_ANSWER, req.getKeyWord());
         bq.should(subjectAnswerQueryBuilder);
 
+        // 匹配 subjectType 字段
         MatchQueryBuilder subjectTypeQueryBuilder =
                 QueryBuilders.matchQuery(EsSubjectFields.SUBJECT_TYPE, SubjectInfoTypeEnum.BRIEF.getCode());
         bq.must(subjectTypeQueryBuilder);
+
+        // 设置至少需要匹配一个 should 条件
         bq.minimumShouldMatch(1);
 
-        HighlightBuilder highlightBuilder = new HighlightBuilder().field("*").requireFieldMatch(false);
-        highlightBuilder.preTags("<span style = \"color:red\">");
-        highlightBuilder.postTags("</span>");
+        // 配置高亮显示
+        HighlightBuilder highlightBuilder = new HighlightBuilder()
+                .field("*") // 高亮所有字段
+                .requireFieldMatch(false); // 不要求字段完全匹配
+        highlightBuilder.preTags("<span style = \"color:red\">"); // 设置高亮前缀
+        highlightBuilder.postTags("</span>"); // 设置高亮后缀
 
+        // 设置搜索请求参数
         esSearchRequest.setBq(bq);
         esSearchRequest.setHighlightBuilder(highlightBuilder);
         esSearchRequest.setFields(EsSubjectFields.FIELD_QUERY);
-        esSearchRequest.setFrom((req.getPageNo() - 1) * req.getPageSize());
-        esSearchRequest.setSize(req.getPageSize());
-        esSearchRequest.setNeedScroll(false);
+        esSearchRequest.setFrom((req.getPageNo() - 1) * req.getPageSize()); // 计算 from 参数
+        esSearchRequest.setSize(req.getPageSize()); // 设置 size 参数
+        esSearchRequest.setNeedScroll(false); // 设置是否需要滚动查询
+
         return esSearchRequest;
     }
-
     private EsIndexInfo getEsIndexInfo() {
         EsIndexInfo esIndexInfo = new EsIndexInfo();
         esIndexInfo.setClusterName("bf5cd64ef90f");
