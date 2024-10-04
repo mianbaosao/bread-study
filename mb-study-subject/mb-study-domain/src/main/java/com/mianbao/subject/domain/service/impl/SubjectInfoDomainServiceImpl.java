@@ -157,22 +157,26 @@ public class SubjectInfoDomainServiceImpl implements SubjectInfoDomainService {
 
     @Override
     public List<SubjectInfoBO> getContributeList() {
+        // 从 Redis 中获取指定范围内的排名信息
         Set<ZSetOperations.TypedTuple<String>> typedTuples = redisUtil.rankWithScore(RANK_KEY, 0, 5);
         if (log.isInfoEnabled()) {
             log.info("getContributeList.typedTuples:{}", JSON.toJSONString(typedTuples));
         }
+        // 检查获取到的排名信息是否为空
         if (CollectionUtils.isEmpty(typedTuples)) {
             return Collections.emptyList();
         }
         List<SubjectInfoBO> boList = new LinkedList<>();
-        typedTuples.forEach((rank -> {
+        typedTuples.forEach(rank -> {
             SubjectInfoBO subjectInfoBO = new SubjectInfoBO();
+            // 设置 SubjectInfoBO 对象的 subjectCount 属性，即用户的贡献分数
             subjectInfoBO.setSubjectCount(rank.getScore().intValue());
+            // 根据排名信息中的值（通常是用户的唯一标识符）调用 getUserInfo 方法获取用户信息
             UserInfo userInfo = userRpc.getUserInfo(rank.getValue());
             subjectInfoBO.setCreateUser(userInfo.getNickName());
             subjectInfoBO.setCreateUserAvatar(userInfo.getAvatar());
             boList.add(subjectInfoBO);
-        }));
+        });
         return boList;
     }
 }

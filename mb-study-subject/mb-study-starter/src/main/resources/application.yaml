@@ -13,7 +13,7 @@ spring:
       min-idle: 20
       max-active: 100
       max-wait: 60000
-      connectionProperties: config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMNuyTmtvHGYk+6nmeHHJV5BJAcgu7use0ch5UgqD24tm8dVmJzeom0FNy+ENHq4xOMWh3bKxu1PQpIOIHLpyg8CAwEAAQ==
+      connection-properties: config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMNuyTmtvHGYk+6nmeHHJV5BJAcgu7use0ch5UgqD24tm8dVmJzeom0FNy+ENHq4xOMWh3bKxu1PQpIOIHLpyg8CAwEAAQ==
       stat-view-servlet:
         enabled: true
         url-pattern: /druid/*
@@ -28,27 +28,29 @@ spring:
           enabled: true
         config:
           enabled: true
-redis:
+
+  redis:
   # Redis数据库索引（默认为0）
-  database: 0
+    database: 0
   # Redis服务器地址
-  host: 117.72.37.31
+    host: 117.72.37.31
   # Redis服务器连接端口
-  port: 6379
+    port: 6379
   # Redis服务器连接密码（默认为空）
-  password: he13140303042
+    password: he13140303042
   # 连接超时时间
-  timeout: 2s
-  lettuce:
-    pool:
+    timeout: 2s
+    lettuce:
+      pool:
       # 连接池最大连接数
-      max-active: 200
-      #连接池最大阻塞等待时间（使用负值表示没有限制）
-      max-wait: -1ms
+        max-active: 200
+      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
       # 连接池中的最大空闲连接
-      max-idle: 10
+        max-idle: 10
       # 连接池中的最小空闲连接
-      min-idle: 0
+        min-idle: 0
+
 es:
   cluster:
     esConfigs[0]:
