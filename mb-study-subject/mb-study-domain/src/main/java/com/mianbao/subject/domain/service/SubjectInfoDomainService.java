@@ -5,6 +5,8 @@ import com.mianbao.subject.common.entity.PageResult;
 import com.mianbao.subject.domain.entity.SubjectInfoBO;
 import com.mianbao.subject.infrastructure.basic.entity.SubjectInfoEs;
 
+import java.util.List;
+
 
 /**
  * @Description: 题目信息
@@ -37,4 +39,9 @@ public interface SubjectInfoDomainService {
      * 全文检索
      */
     PageResult<SubjectInfoEs> getSubjectPageBySearch(SubjectInfoBO subjectInfoBO);
+    /**
+     * 获取贡献榜
+     */
+    List<SubjectInfoBO> getContributeList();
+
 }
