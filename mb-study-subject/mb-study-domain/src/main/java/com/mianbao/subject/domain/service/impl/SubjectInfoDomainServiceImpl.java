@@ -96,7 +96,7 @@ public class SubjectInfoDomainServiceImpl implements SubjectInfoDomainService {
         subjectInfoEs.setSubjectName(subjectInfo.getSubjectName());
         subjectInfoEs.setSubjectType(subjectInfo.getSubjectType());
         subjectEsService.insert(subjectInfoEs);
-        //redis放入zadd计入排行榜
+        //redis放入Zset计入排行榜
         redisUtil.addScore(RANK_KEY, LoginUtil.getLoginId(), 1);
     }
 
