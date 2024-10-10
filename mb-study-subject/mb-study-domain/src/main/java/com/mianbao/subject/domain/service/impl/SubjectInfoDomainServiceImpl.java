@@ -86,7 +86,7 @@ public class SubjectInfoDomainServiceImpl implements SubjectInfoDomainService {
             });
         });
         subjectMappingService.batchInsert(subjectMappingList);
-        //同步到es
+        //同步到es里面
         SubjectInfoEs subjectInfoEs = new SubjectInfoEs();
         subjectInfoEs.setDocId(new IdWorkerUtil(1, 1, 1).nextId());
         subjectInfoEs.setSubjectId(subjectInfo.getId());
