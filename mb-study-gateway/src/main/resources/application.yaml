@@ -23,6 +23,12 @@ spring:
             - Path=/subject/**
           filters:
             - StripPrefix=1
+        - id: forum
+          uri: lb://mb-study-forum
+          predicates:
+            - Path=/forum/**
+          filters:
+            - StripPrefix=1
   redis:
     database: 1
     host: 117.72.37.31
