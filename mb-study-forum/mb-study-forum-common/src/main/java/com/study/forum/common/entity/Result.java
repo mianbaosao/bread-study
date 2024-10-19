@@ -1,7 +1,7 @@
-package com.stduy.forum.common.entity;
+package com.study.forum.common.entity;
 
 
-import com.stduy.forum.common.enums.ResultCodeEnum;
+import com.study.forum.common.enums.ResultCodeEnum;
 import lombok.Data;
 
 /**

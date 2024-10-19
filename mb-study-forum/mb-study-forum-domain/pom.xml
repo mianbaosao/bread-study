@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>mb-stduy-forum-domain</artifactId>
+    <artifactId>mb-study-forum-domain</artifactId>
 
     <build>
         <plugins>
@@ -68,6 +68,11 @@
         <dependency>
             <groupId>com.mianbao</groupId>
             <artifactId>mb-study-forum-infrastructure</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mianbao</groupId>
+            <artifactId>mb-study-forum-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <!-- <dependency>

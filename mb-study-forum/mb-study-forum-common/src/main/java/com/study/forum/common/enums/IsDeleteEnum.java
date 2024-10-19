@@ -1,4 +1,4 @@
-package com.stduy.forum.common.enums;
+package com.study.forum.common.enums;
 
 /**
  * @Description: 删除状态枚举

@@ -14,4 +14,6 @@ public interface BlogDataService {
 
 
     ForumBlogdata findSingleBLog(BlogDataBO blogDataBO);
+
+    void queryByUserId(int userId);
 }

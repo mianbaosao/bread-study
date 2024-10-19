@@ -12,7 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @MapperScan("com.mianbao.**.dao")
-@ComponentScan(basePackages = "com.mianbao")
+@ComponentScan("com.mianbao")
 public class ForumApplication {
     public static void main(String[] args) {
         SpringApplication.run(ForumApplication.class);

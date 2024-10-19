@@ -1,4 +1,4 @@
-package com.stduy.forum.common.entity;
+package com.study.forum.common.entity;
 
 import lombok.Data;
 

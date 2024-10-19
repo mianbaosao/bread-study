@@ -1,6 +1,6 @@
 package com.mianbao.forum.application.dto;
 
-import com.stduy.forum.common.entity.PageInfo;
+import com.study.forum.common.entity.PageInfo;
 import lombok.Data;
 
 /**

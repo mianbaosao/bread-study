@@ -10,7 +10,7 @@
         <module name="mb-study-application-job" />
         <module name="mb-study-forum-common" />
         <module name="mb-study-forum-infrastructure" />
-        <module name="mb-study-commom" />
+        <module name="mb-study-domain" />
         <module name="mb-study-auth-application-job" />
         <module name="mb-study-auth-application-controller" />
         <module name="mb-study-forum-application" />
@@ -21,6 +21,7 @@
         <module name="mb-study-application-controller" />
         <module name="mb-study-forum-starter" />
         <module name="mb-study-application-mq" />
+        <module name="mb-study-commom" />
         <module name="mb-study-oss" />
         <module name="mb-study-forum-domain" />
         <module name="mb-study-auth-application-mq" />
@@ -33,15 +34,16 @@
         <module name="mb-study-infrastructure" />
         <module name="mb-study-gateway" />
         <module name="mb-study-online" />
+        <module name="mb-stduy-forum-domain" />
         <module name="qh-club-starter" />
         <module name="mb-study-starter" />
-        <module name="mb-study-domain" />
         <module name="qh-club-subject-api" />
         <module name="mb-study-auth-starter-api" />
         <module name="qh-club-commom" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
+      <module name="mb-stduy-forum-domain" target="8" />
       <module name="mb-study-application" target="1.5" />
       <module name="mb-study-application-controller" target="1.8" />
       <module name="mb-study-application-job" target="1.5" />

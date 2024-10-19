@@ -2,6 +2,8 @@ package com.mianbao.forum.common.service.impl;
 
 import com.mianbao.forum.common.convert.BlogDataBoConvertToPo;
 import com.mianbao.forum.common.entity.BlogDataBO;
+import com.mianbao.forum.common.handler.recommend.RecommendType;
+import com.mianbao.forum.common.handler.recommend.RecommendTypeFactory;
 import com.mianbao.forum.common.service.BlogDataService;
 import com.mianbao.forum.infa.basic.entity.ForumBlogdata;
 import com.mianbao.forum.infa.basic.service.ForumBlogdataService;
@@ -21,6 +23,9 @@ public class BlogDataServiceImpl implements BlogDataService {
 
     @Resource
     private ForumBlogdataService forumBlogdataService;
+
+    @Resource
+    private RecommendTypeFactory recommendTypeFactory;
     @Override
     public ForumBlogdata findSingleBLog(BlogDataBO blogDataBO) {
         ForumBlogdata blogdata= BlogDataBoConvertToPo.INSTANCE.BlogDataTOPo(blogDataBO);
@@ -28,4 +33,12 @@ public class BlogDataServiceImpl implements BlogDataService {
       ForumBlogdata po =  forumBlogdataService.queryById(blogId);
       return po;
     }
+
+    @Override
+    public void queryByUserId(int userId) {
+        String a="CB";
+        RecommendType recommendType=recommendTypeFactory.getType(a);
+        System.out.println(recommendType.query(userId));
+    }
+
 }
