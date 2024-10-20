@@ -7,6 +7,7 @@ import com.mianbao.forum.common.handler.recommend.RecommendTypeFactory;
 import com.mianbao.forum.common.service.BlogDataService;
 import com.mianbao.forum.infa.basic.entity.ForumBlogdata;
 import com.mianbao.forum.infa.basic.service.ForumBlogdataService;
+import com.mianbao.subject.common.util.LoginUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +39,8 @@ public class BlogDataServiceImpl implements BlogDataService {
     public void queryByUserId(int userId) {
         String a="CB";
         RecommendType recommendType=recommendTypeFactory.getType(a);
+        String loginId= LoginUtil.getLoginId();
+        System.out.println("现在的loginId是："+loginId);
         System.out.println(recommendType.query(userId));
     }
 

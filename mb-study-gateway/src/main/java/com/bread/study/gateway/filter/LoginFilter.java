@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.io.buffer.DataBufferFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -19,6 +21,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
+
 /**
  * 登录拦截器
  */
@@ -26,9 +31,11 @@ import reactor.core.publisher.Mono;
 @Slf4j
 public class LoginFilter implements GlobalFilter {
 
-    //filter：这是过滤器的核心方法。它接收两个参数：
-    //ServerWebExchange exchange：封装了 HTTP 请求和响应的对象，代表当前正在处理的请求。
-    //GatewayFilterChain chain：过滤链，表示多个过滤器可以依次处理请求，chain.filter(exchange) 会将请求传递给下一个过滤器。
+    @Resource
+    private RedisTemplate<String, String> redisTemplate; // 注入RedisTemplate
+
+    private static final String LOCK_KEY_PREFIX = "lock:login:"; // 分布式锁的前缀
+
     @Override
     @SneakyThrows
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -37,18 +44,34 @@ public class LoginFilter implements GlobalFilter {
         ServerHttpRequest.Builder mutate = request.mutate();
         String url = request.getURI().getPath();
         log.info("LoginFilter.filter.url:{}", url);
+
         if (url.equals("/user/doLogin")) {
             return chain.filter(exchange);
         }
-        SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
-        log.info("LoginFilter.filter.url:{}", new Gson().toJson(tokenInfo));
-        String loginId = (String) tokenInfo.getLoginId();
-        //将提取到的 loginId 添加到请求头中，使用 mutate.header("loginId", loginId) 来修改请求头，
-        // 以便下游服务可以获取到当前登录用户的信息。
-        mutate.header("loginId", loginId);
-        //通过 exchange.mutate().request(mutate.build()).build() 构建一个新的 ServerWebExchange，它包含了
-        // 修改后的请求（带有 loginId 的请求头），然后通过 chain.filter 将这个修改后的请求传递给下一个过滤器
-        return chain.filter(exchange.mutate().request(mutate.build()).build());
-    }
 
+        SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
+        String loginId = (String) tokenInfo.getLoginId();
+        String lockKey = LOCK_KEY_PREFIX + loginId; // 创建锁的唯一键
+
+        // 尝试获取分布式锁
+        Boolean isLockAcquired = redisTemplate.opsForValue().setIfAbsent(lockKey, "lock", 10, TimeUnit.SECONDS);
+
+        if (Boolean.TRUE.equals(isLockAcquired)) {
+            try {
+                log.info("Lock acquired for loginId: {}", loginId);
+                // 将提取到的 loginId 添加到请求头中
+                mutate.header("loginId", loginId);
+                return chain.filter(exchange.mutate().request(mutate.build()).build());
+            } finally {
+                // 释放锁
+                redisTemplate.delete(lockKey);
+                log.info("Lock released for loginId: {}", loginId);
+            }
+        } else {
+            log.warn("Failed to acquire lock for loginId: {}, retry later.", loginId);
+            response.setStatusCode(HttpStatus.TOO_MANY_REQUESTS);
+            return response.setComplete();
+        }
+    }
 }
+

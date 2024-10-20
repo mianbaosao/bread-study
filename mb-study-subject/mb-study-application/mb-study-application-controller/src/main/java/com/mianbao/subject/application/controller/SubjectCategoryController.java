@@ -8,6 +8,7 @@ import com.mianbao.subject.application.dto.SubjectCategoryDTO;
 
 import com.mianbao.subject.application.dto.SubjectLabelDTO;
 import com.mianbao.subject.common.entity.Result;
+import com.mianbao.subject.common.util.LoginUtil;
 import com.mianbao.subject.domain.entity.SubjectCategoryBO;
 import com.mianbao.subject.domain.service.SubjectCategoryDomainService;
 
@@ -166,6 +167,8 @@ public class SubjectCategoryController {
                 dto.setLabelDTOList(labelDTOList);
                 dtoList.add(dto);
             });
+            String loginId= LoginUtil.getLoginId();
+            System.out.println("当前的loginId为:"+loginId);
             return Result.success(dtoList);
         } catch (Exception e) {
             log.error("SubjectCategoryController.queryPrimaryCategory.error:{}", e.getMessage(), e);
